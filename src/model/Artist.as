@@ -10,10 +10,10 @@ package model
 			_albumList = new Vector.<Album>();
 		}
 		
-		public function get albumList() : Vector.<Track>	{ return _albumList; }
+		public function get albumList() : Vector.<Album>	{ return _albumList; }
 		public function get name() 		: String 			{ return _name; }
 		
-		public function set albumList(value : Vector.<Track>) 	: void	{ _albumList = value; }
+		public function set albumList(value : Vector.<Album>) 	: void	{ _albumList = value; }
 		public function set name(value : String) 				: void 	{ _name = value; }
 
 	}
