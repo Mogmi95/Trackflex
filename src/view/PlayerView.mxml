@@ -48,6 +48,9 @@
 			protected function creationCompleteHandler(event : FlexEvent) : void
 			{
 				trackslide.thumb.addEventListener(MouseEvent.MOUSE_DOWN, onThumbMouseDownHandler);
+				trackslide.showDataTip = false;
+				volumeslide.dataTipPrecision = 0;
+				
 			}
 			
 			protected function onThumbMouseDownHandler(event : MouseEvent) : void
