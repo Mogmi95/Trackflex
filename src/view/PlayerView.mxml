@@ -8,7 +8,8 @@
 		<!-- Placer ici les éléments non visuels (services et objets de valeur, par exemple). -->
 	</fx:Declarations>
 	
-	<s:BorderContainer x="0" y="0" width="100%" height="100%" backgroundColor="#000000">
+	<s:BorderContainer x="0" y="0" width="100%" height="100%"
+					   backgroundColor="0x333333" borderColor="0x000000">
 		<s:Button id="prev" left="10" width="50" height="50" cornerRadius="90" verticalCenter="0"/>
 		<s:Button id="play" left="130" width="50" height="50" cornerRadius="90" verticalCenter="0"/>
 		<s:Button id="next" left="70" width="50" height="50" cornerRadius="90" verticalCenter="0"/>
