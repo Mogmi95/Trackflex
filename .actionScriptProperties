@@ -26,10 +26,10 @@
     <buildTarget buildTargetName="default">
       <airSettings airCertificatePath="C:/Users/roulyo/Documents/certifflex.p12" airTimestamp="true" anePathSet="true" version="1">
         <airExcludes>
-          <pathEntry path="events"/>
           <pathEntry path="view"/>
-          <pathEntry path="model"/>
           <pathEntry path="controller"/>
+          <pathEntry path="model"/>
+          <pathEntry path="events"/>
         </airExcludes>
         <anePaths/>
       </airSettings>
