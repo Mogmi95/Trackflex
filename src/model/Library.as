@@ -1,17 +1,19 @@
 package model
 {
+	import flash.utils.Dictionary;
+
 	public class Library
 	{
-		private var _artistList	: Vector.<Artist>;
+		private var _dirDictionary	: Dictionary;
 		
 		public function Library()
 		{
-			_artistList = new Vector.<Artist>();
+			_dirDictionary = new Dictionary();
 		}
 
-		public function get artistList() 	: Vector.<Artist>	{ return _artistList; }
+		public function get dirDictionary() 	: Dictionary	{ return _dirDictionary; }
 
-		public function set artistList(value : Vector.<Artist>) 	: void	{ _artistList = value; }
+		public function set dirDictionary(value : Dictionary) 	: void	{ _dirDictionary = value; }
 
 	}
 }

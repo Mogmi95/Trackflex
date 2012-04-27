@@ -22,9 +22,9 @@ package controller
 		
 		private static var _pausePoint		: Number			= 0.;
 		private static var _playing			: Boolean			= false;
-		private static var _currentTrack	: Sound;
-		private static var _soundChannel	: SoundChannel;
-		private static var _soundTransform	: SoundTransform;
+		private static var _currentTrack	: Sound				= null;
+		private static var _soundChannel	: SoundChannel		= null;
+		private static var _soundTransform	: SoundTransform	= null;
 		
 		public static function get currentTrack()	: Sound	{ return _currentTrack; }
 		
@@ -32,7 +32,10 @@ package controller
 		
 		public static function play() : void
 		{
-			if (!_playing)
+			if (_currentTrack == null)
+				return;
+			
+			if (!_playing )
 			{
 				_soundChannel =_currentTrack.play(_pausePoint);
 				_soundTransform = _soundChannel.soundTransform;
@@ -77,6 +80,9 @@ package controller
 		
 		public static function setCurrentTrack(pathName : String) : void
 		{
+			if (_playing)
+				stop();
+			
 			_currentTrack = new Sound(new URLRequest(pathName));
 			_currentTrack.addEventListener(Event.COMPLETE, onCompleteHandler);
 		}
@@ -123,6 +129,7 @@ package controller
 			_view.time.text = "0:00/" + formatNumber(_currentTrack.length);
 			_view.trackslide.value = 0.;
 			_currentTrack.removeEventListener(Event.COMPLETE, onCompleteHandler);
+			play();
 		}
 	}
 }

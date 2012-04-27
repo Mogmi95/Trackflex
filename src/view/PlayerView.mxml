@@ -26,6 +26,9 @@
 			
 			protected function play_clickHandler(event : MouseEvent) : void
 			{
+				if (PlayerController.currentTrack == null)
+					return;
+				
 				PlayerController.play();
 				if (playing)
 					play.setStyle("icon", ASSET_PLAY);
@@ -41,8 +44,11 @@
 			
 			protected function trackslide_changeHandler(event : Event) : void
 			{
-				PlayerController.pausePoint = trackslide.value * PlayerController.currentTrack.length;
-				PlayerController.refreshTime();
+				if (PlayerController.currentTrack != null)
+				{
+					PlayerController.pausePoint = trackslide.value * PlayerController.currentTrack.length;
+					PlayerController.refreshTime();
+				}
 			}
 			
 			protected function creationCompleteHandler(event : FlexEvent) : void
@@ -63,10 +69,11 @@
 			{
 				PlayerController.changeSoundPosition();
 				draggingTrackSlide = false;
-				addEventListener(Event.ENTER_FRAME, PlayerController.onProgressHandler);
+				if (playing)
+					addEventListener(Event.ENTER_FRAME, PlayerController.onProgressHandler);
 			}
 			
-			protected function stop_clickHandler(event:MouseEvent):void
+			protected function stop_clickHandler(event : MouseEvent) : void
 			{
 				PlayerController.stop();
 				play.setStyle("icon", ASSET_PLAY);
