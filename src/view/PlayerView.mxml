@@ -18,11 +18,11 @@
 			
 			[Embed(source="assets/icons/player_play.png")]
 			[Bindable]
-			private static var ASSET_PLAY : Class;
+			public static var ASSET_PLAY : Class;
 
 			[Embed(source="assets/icons/player_pause.png")]
 			[Bindable]
-			private static var ASSET_PAUSE : Class;
+			public static var ASSET_PAUSE : Class;
 			
 			protected function play_clickHandler(event : MouseEvent) : void
 			{
@@ -30,10 +30,6 @@
 					return;
 				
 				PlayerController.play();
-				if (playing)
-					play.setStyle("icon", ASSET_PLAY);
-				else
-					play.setStyle("icon", ASSET_PAUSE);
 				playing = !playing;
 			}
 			
@@ -76,8 +72,17 @@
 			protected function stop_clickHandler(event : MouseEvent) : void
 			{
 				PlayerController.stop();
-				play.setStyle("icon", ASSET_PLAY);
 				playing = false;
+			}
+			
+			protected function prev_clickHandler(event : MouseEvent) : void
+			{
+				PlayerController.previous();
+			}
+			
+			protected function next_clickHandler(event : MouseEvent) : void
+			{
+				PlayerController.next();
 			}
 			
 		]]>
@@ -88,10 +93,11 @@
 		<!-- Placer ici les éléments non visuels (services et objets de valeur, par exemple). -->
 	</fx:Declarations>
 	
-	<s:BorderContainer x="0" y="0" width="100%" height="100%"
-					   backgroundColor="0x333333" borderColor="0x000000">
+	<s:BorderContainer x="0" y="0" width="100%" height="100%" backgroundColor="0x333333"
+					   borderColor="0x000000">
 		<mx:Button id="prev" left="10" width="35" height="35" cornerRadius="90"
-				  icon="@Embed('assets/icons/player_start.png')" verticalCenter="0"/>
+				  icon="@Embed('assets/icons/player_start.png')" verticalCenter="0"
+				  click="prev_clickHandler(event)"/>
 		<mx:Button id="play" left="55" width="50" height="50" click="play_clickHandler(event)"
 				  cornerRadius="90" icon="{ASSET_PLAY}"
 				  verticalCenter="0"/>
@@ -99,16 +105,19 @@
 				  cornerRadius="90" icon="@Embed('assets/icons/player_stop.png')"
 				  verticalCenter="0"/>
 		<mx:Button id="next" left="160" width="35" height="35" cornerRadius="90"
-				  icon="@Embed('assets/icons/player_end.png')" verticalCenter="0"/>
+				  icon="@Embed('assets/icons/player_end.png')" verticalCenter="0"
+				  click="next_clickHandler(event)"/>
 		
 		<s:HSlider id="trackslide" left="300" width="70%" maximum="1" minimum="0" stepSize="0.001"
-				   verticalCenter="0" change="trackslide_changeHandler(event)"/>
+				   verticalCenter="16" change="trackslide_changeHandler(event)"/>
 		
 		<s:HSlider id="volumeslide" right="10" width="70" change="volumeslide_changeHandler(event)"
 				   maximum="100" minimum="0" value="100" verticalCenter="0"/>
 		<s:Image id="volumeicon" right="74" width="56" height="28"
 				 source="@Embed('assets/volume-icone.png')" verticalCenter="-3"/>
-		<s:Label id="time" left="190" width="100" height="48" fontFamily="Verdana" fontSize="14"
+		<s:Label id="time" left="205" width="87" height="25" fontFamily="Verdana" fontSize="14"
 				 text="0:00/0:00" textAlign="center" verticalAlign="middle" verticalCenter="0"/>
+		<s:Label id="trackInfo" left="300" width="100%" height="15" fontFamily="Verdana" fontSize="14"
+				 verticalCenter="-16"/>
 	</s:BorderContainer>
 </s:Group>

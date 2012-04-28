@@ -3,12 +3,22 @@
 		 xmlns:s="library://ns.adobe.com/flex/spark"
 		 xmlns:mx="library://ns.adobe.com/flex/mx"
 		 xmlns:itemrenderer="view.itemrenderer.*">
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayList;
+		]]>
+	</fx:Script>
+
 	<fx:Declarations>
 		<!-- Placer ici les éléments non visuels (services et objets de valeur, par exemple). -->
 	</fx:Declarations>
-		<mx:DataGrid width="100%" height="100%" >
+		<mx:DataGrid id="grid" width="100%" height="100%" dataProvider="{new ArrayList()}">
 			<mx:columns>
-				<mx:DataGridColumn headerText="Tracks" itemRenderer="view.itemrenderer.TrackPlaylistRenderer"/>
+				<mx:DataGridColumn itemRenderer="view.itemrenderer.TrackButtonRenderer" width="82" dataField="buttons"
+								   headerText="" rendererIsEditor="true" sortable="false"/>
+				<mx:DataGridColumn headerText="Title" dataField="title" sortable="false"/>
+				<mx:DataGridColumn headerText="Album" dataField="album" sortable="false"/>
+				<mx:DataGridColumn headerText="Artist" dataField="artist" sortable="false"/>
 			</mx:columns>
 		</mx:DataGrid>
 </s:Group>

@@ -46,7 +46,7 @@
 	<mx:TabNavigator right="0" bottom="0" width="80%" height="225"
 					 borderColor="0x000000">
 		<s:NavigatorContent width="100%" height="100%" label="Playlist">
-			<view:PlaylistView x="0" y="0" width="100%" height="100%">
+			<view:PlaylistView id="playlist" x="0" y="0" width="100%" height="100%">
 			</view:PlaylistView>
 		</s:NavigatorContent>
 		<s:NavigatorContent width="100%" height="100%" label="Equalizer">

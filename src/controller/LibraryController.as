@@ -1,10 +1,7 @@
 package controller
 {	
 	import flash.filesystem.File;
-	import flash.utils.Dictionary;
-	
-	import model.Artist;
-	import model.Library;
+	import flash.utils.Dictionary;		
 	
 	import mx.controls.Label;
 	import mx.core.FlexGlobals;

@@ -5,18 +5,41 @@
 	<fx:Declarations>
 		<!-- Placer ici les éléments non visuels (services et objets de valeur, par exemple). -->
 	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import controller.LibraryController;
+			import controller.PlayerController;
+			
+			import mx.events.FlexEvent;
+			
+			protected function dataTooltipFormat(n : Number) : String
+			{
+				return (n < 0 ? n : "+" + n) + " dB";
+			}
+				
+		]]>
+	</fx:Script>
+	
 	<s:BorderContainer width="100%" height="100%"
 					   backgroundColor="0x444444" borderColor="0x666666">		
-		<s:VSlider top="20" bottom="50" horizontalCenter="-200"/>
-		<s:VSlider top="20" bottom="50" horizontalCenter="-100"/>
-		<s:VSlider top="20" bottom="50" horizontalCenter="0"/>
-		<s:VSlider top="20" bottom="50" horizontalCenter="100"/>
-		<s:VSlider top="20" bottom="50" horizontalCenter="200"/>
-		<s:Label bottom="20" horizontalCenter="-200" text="100" textAlign="center" verticalAlign="middle"/>
-		<s:Label bottom="20" horizontalCenter="200" text="8K" textAlign="center" verticalAlign="middle"/>
-		<s:Label bottom="20" horizontalCenter="-100" text="300" textAlign="center" verticalAlign="middle"/>
-		<s:Label bottom="20" horizontalCenter="0" text="1K" textAlign="center" verticalAlign="middle"/>
-		<s:Label bottom="20" horizontalCenter="100" text="3K" textAlign="center" verticalAlign="middle"/>
+		<s:VSlider top="20" bottom="50" horizontalCenter="-200" maximum="12" minimum="-12"
+				   stepSize="1" value="0" dataTipFormatFunction="dataTooltipFormat"/>
+		<s:VSlider top="20" bottom="50" horizontalCenter="-100" maximum="12" minimum="-12"
+				   stepSize="1" value="0" dataTipFormatFunction="dataTooltipFormat"/>
+		<s:VSlider top="20" bottom="50" horizontalCenter="0" maximum="12" minimum="-12" stepSize="1"
+				   value="0" dataTipFormatFunction="dataTooltipFormat"/>
+		<s:VSlider top="20" bottom="50" horizontalCenter="100" maximum="12" minimum="-12"
+				   stepSize="1" value="0" dataTipFormatFunction="dataTooltipFormat"/>
+		<s:VSlider top="20" bottom="50" horizontalCenter="200" maximum="12" minimum="-12"
+				   stepSize="1" value="0" dataTipFormatFunction="dataTooltipFormat"/>
+		<s:Label bottom="20" horizontalCenter="-200" text="100Hz" textAlign="center" verticalAlign="middle"/>
+		<s:Label bottom="20" horizontalCenter="200" text="8KHz" textAlign="center" verticalAlign="middle"/>
+		<s:Label bottom="20" horizontalCenter="-100" text="300Hz" textAlign="center" verticalAlign="middle"/>
+		<s:Label bottom="20" horizontalCenter="0" text="1KHz" textAlign="center" verticalAlign="middle"/>
+		<s:Label bottom="20" horizontalCenter="100" text="3KHz" textAlign="center" verticalAlign="middle"/>
+		<s:Label top="20" horizontalCenter="-250" text="+12 dB"/>
+		<s:Label left="169" bottom="50" horizontalCenter="-250" text="-12 dB"/>
 	</s:BorderContainer>
 
 </s:Group>

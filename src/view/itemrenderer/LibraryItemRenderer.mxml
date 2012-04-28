@@ -8,8 +8,8 @@
 		<![CDATA[
 			import controller.LibraryController;
 			import controller.PlayerController;
+			import controller.PlaylistController;
 			
-			import model.Library;
 			protected function label_rollOverHandler(event:MouseEvent):void
 			{
 				label.setStyle("textDecoration", "underline");
@@ -27,7 +27,7 @@
 				
 				if (ext == "mp3")
 				{
-					PlayerController.setCurrentTrack(LibraryController.libPath + "/" + Label(event.currentTarget).text);
+					PlaylistController.addTrack(LibraryController.libPath + "/" + Label(event.currentTarget).text);
 				}
 				else
 				{
