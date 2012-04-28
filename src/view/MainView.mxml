@@ -2,8 +2,15 @@
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
 		 xmlns:s="library://ns.adobe.com/flex/spark"
 		 xmlns:mx="library://ns.adobe.com/flex/mx"
-		 creationComplete="initList()">
+		 xmlns:view="view.*"
+		 creationComplete="initList()" xmlns:minko="view.minko.*">
 
+	<s:states>
+		<s:State name="tracks" />
+		<s:State name="albums"/>
+		<s:State name="visual"/>
+	</s:states>   
+	
 	<fx:Script>
 		<![CDATA[
 			import mx.collections.ArrayCollection;
@@ -36,14 +43,11 @@
 				artistName.setStyle("color", "#8B8BF5");
 			}
 		]]>
-	</fx:Script>
+	</fx:Script> 
 	
-	<s:states>
-		<s:State name="tracks" />
-		<s:State name="albums"/>
-	</s:states>    
-	
-	<mx:ViewStack selectedChild.tracks="{tracksView}" selectedChild.albums="{albumView}">
+	<mx:ViewStack includeIn="albums,tracks"
+				  selectedChild.albums="{albumView}"
+				  selectedChild.tracks="{tracksView}">
 		<s:NavigatorContent id="tracksView">
 			<s:SkinnableContainer styleName="middleContainer" backgroundColor="0x666666">
 				<s:HGroup width="100%" height="100%">
@@ -94,4 +98,6 @@
 			</s:SkinnableContainer>
 		</s:NavigatorContent>
 	</mx:ViewStack>
+	<minko:VisualizerView includeIn="visual" x="0" y="0" width="100%" height="100%">
+	</minko:VisualizerView>
 </s:Group>

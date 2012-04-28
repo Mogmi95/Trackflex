@@ -10,6 +10,8 @@
         </excludedEntries>
       </libraryPathEntry>
       <libraryPathEntry kind="1" linkType="1" path="libs"/>
+      <libraryPathEntry kind="3" linkType="1" path="C:/Users/roulyo/Downloads/minko-1.2-beta.swc" useDefaultLinkType="false"/>
+      <libraryPathEntry kind="3" linkType="1" path="/minko-lighting/bin/minko-lighting.swc" useDefaultLinkType="false"/>
     </libraryPath>
     <sourceAttachmentPath/>
   </compiler>
@@ -37,4 +39,3 @@
     </buildTarget>
   </buildTargets>
 </actionScriptProperties>
-

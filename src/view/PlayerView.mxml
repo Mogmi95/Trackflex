@@ -120,7 +120,7 @@
 				  icon="@Embed('assets/icons/player_end.png')" verticalCenter="0"
 				  click="next_clickHandler(event)"/>
 		
-		<s:HSlider id="trackslide" left="300" width="68%" maximum="1" minimum="0" stepSize="0.001"
+		<s:HSlider id="trackslide" left="300" width="67%" maximum="1" minimum="0" stepSize="0.001"
 				   verticalCenter="16" change="trackslide_changeHandler(event)"/>
 		
 		<s:HSlider id="volumeslide" right="10" width="70" change="volumeslide_changeHandler(event)"
