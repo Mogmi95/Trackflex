@@ -7,7 +7,6 @@
 	
 	<fx:Declarations>
 		<fx:Boolean id="draggingTrackSlide">false</fx:Boolean>
-		<fx:Boolean id="playing">false</fx:Boolean>
 	</fx:Declarations>
 	
 	<fx:Script>
@@ -30,7 +29,7 @@
 					return;
 				
 				PlayerController.play();
-				playing = !playing;
+				PlayerController.playing = !PlayerController.playing;
 			}
 			
 			protected function volumeslide_changeHandler(event : Event) : void
@@ -65,14 +64,14 @@
 			{
 				PlayerController.changeSoundPosition();
 				draggingTrackSlide = false;
-				if (playing)
+				if (PlayerController.playing)
 					addEventListener(Event.ENTER_FRAME, PlayerController.onProgressHandler);
 			}
 			
 			protected function stop_clickHandler(event : MouseEvent) : void
 			{
 				PlayerController.stop();
-				playing = false;
+				PlayerController.playing = false;
 			}
 			
 			protected function prev_clickHandler(event : MouseEvent) : void
