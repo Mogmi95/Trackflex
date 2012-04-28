@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" 
+				autoDrawBackground="true">
+	<s:layout>
+		<s:HorizontalLayout/>
+	</s:layout>
+	<s:SkinnableContainer width="302" height="20" backgroundColor="#656569">
+		<s:Image x="20" width="15" height="15" buttonMode="true"
+				 source="http://46.105.42.21:4040/icons/play.gif" styleName="play"/>
+		<s:Image x="40" width="15" height="15" buttonMode="true"
+				 source="http://46.105.42.21:4040/icons/add.gif" styleName="add"/>
+		<s:SkinnableContainer x="57" width="245" backgroundColor="#4D4C52">
+			<s:HGroup x="0" y="0" width="245" height="20" paddingBottom="5" paddingLeft="5"
+					  paddingRight="5" paddingTop="5" styleName="trackGroup" verticalAlign="middle">
+				<s:Label width="20" color="white" styleName="trackNumber" text="{data.number}"/>
+				<s:Label width="180" color="white" styleName="trackName" text="{data.name}"/>
+				<s:Label color="white" styleName="trackLength" text="{data.length}"/>
+			</s:HGroup>
+		</s:SkinnableContainer>
+	</s:SkinnableContainer>
+</s:ItemRenderer>
