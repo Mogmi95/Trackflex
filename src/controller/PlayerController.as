@@ -1,5 +1,7 @@
 package controller
 {
+	import config.TrackflexConfig;
+	
 	import flash.events.Event;
 	import flash.events.ProgressEvent;
 	import flash.events.SampleDataEvent;
@@ -111,6 +113,7 @@ package controller
 				_soundChannel =_currentTrack.play(_pausePoint);
 				_soundTransform.volume = _view.volumeslide.value / 100;
 				_soundChannel.soundTransform = _soundTransform;
+				_soundChannel.addEventListener(Event.SOUND_COMPLETE, soundCompleteHandler);
 			}
 		}
 		

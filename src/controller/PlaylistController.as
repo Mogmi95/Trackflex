@@ -1,5 +1,7 @@
 package controller
 {
+	import config.TrackflexConfig;
+	
 	import flash.events.Event;
 	import flash.media.ID3Info;
 	import flash.media.Sound;
@@ -57,20 +59,34 @@ package controller
 		{
 			if (_currentPos < _playlist.length - 1)
 			{
-				++_currentPos;
-				PlayerController.currentTrack = _playlist[_currentPos];
-				_view.grid.selectedIndex = _currentPos;
+				if (TrackflexConfig.random && TrackflexConfig.loop != TrackflexConfig.LOOP_ONE)
+					_currentPos = randomize();
+				else if (TrackflexConfig.loop == TrackflexConfig.NO_LOOP)
+					++_currentPos;
 			}
+			else if (TrackflexConfig.loop == TrackflexConfig.LOOP_ALL)
+			{
+				_currentPos = 0;
+			}
+			PlayerController.currentTrack = _playlist[_currentPos];
+			_view.grid.selectedIndex = _currentPos;
 		}
 		
 		public static function prevTrack() : void
 		{
 			if (_currentPos > 0)
 			{
-				--_currentPos;
-				PlayerController.currentTrack = _playlist[_currentPos];
-				_view.grid.selectedIndex = _currentPos;
+				if (TrackflexConfig.random && TrackflexConfig.loop != TrackflexConfig.LOOP_ONE)
+					_currentPos = randomize();
+				else if (TrackflexConfig.loop == TrackflexConfig.NO_LOOP)
+					--_currentPos;
 			}
+			else if (TrackflexConfig.loop == TrackflexConfig.LOOP_ALL)
+			{
+				_currentPos = _playlist.length - 1;
+			}
+			PlayerController.currentTrack = _playlist[_currentPos];
+			_view.grid.selectedIndex = _currentPos;
 		}
 		
 		private static function onCompleteHandler(event : Event) : void
@@ -84,6 +100,18 @@ package controller
 			IList(_view.grid.dataProvider).addItem(track);
 			_playlist.push(sound);
 			sound.removeEventListener(Event.COMPLETE, onCompleteHandler);
+		}
+		
+		private static function randomize() : int
+		{
+			var newpos	: int	= Math.floor(Math.random() * _playlist.length);
+			
+			while (newpos == _currentPos)
+				newpos = Math.floor(Math.random() * _playlist.length);
+			
+			trace(newpos);
+			
+			return newpos;
 		}
 	}
 }

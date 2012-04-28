@@ -2,11 +2,37 @@
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
 		 xmlns:s="library://ns.adobe.com/flex/spark"
 		 xmlns:mx="library://ns.adobe.com/flex/mx">
+	
+	<fx:Script>
+		<![CDATA[
+			import controller.LibraryController;
+			protected function import_clickHandler(event : MouseEvent) : void
+			{
+				var libraryDir	: File	= new File();
+
+				libraryDir.addEventListener(Event.SELECT, onSelectDirectoryHandler);
+				libraryDir.browseForDirectory("Toto");
+			}
+			
+			protected function onSelectDirectoryHandler(event : Event) : void
+			{
+				LibraryController.loadFromDir(File(event.target));
+				LibraryController.populateView();	
+			}
+		]]>
+	</fx:Script>
+	
 	<fx:Declarations>
 		<!-- Placer ici les éléments non visuels (services et objets de valeur, par exemple). -->
 	</fx:Declarations>
 	
-	<s:BorderContainer x="0" y="0" width="100%" height="100%"
+	<s:BorderContainer x="0" y="0" width="100%" height="25"
+					   backgroundColor="0x222222" borderColor="0x000000">
+		<s:Image id="import_" x="10" y="0" width="25" height="25" source="assets/icons/upload.gif"
+				 buttonMode="true" click="import_clickHandler(event)"
+				 toolTip="Change library directory"/>
+	</s:BorderContainer>
+	<s:BorderContainer x="0" y="25" width="100%" height="100%"
 					   backgroundColor="0x444444" borderColor="0x000000">
 		<s:Scroller x="0" y="0" width="100%" height="100%">
 			<s:VGroup id="vGroup" width="100%" height="100%" gap="0">

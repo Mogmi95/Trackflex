@@ -13,19 +13,8 @@
 			import mx.events.FlexEvent;
 			
 			protected function onCreationCompleteHandler(event : FlexEvent) : void
-			{
-				var libraryDir	: File	= new File();
-				
+			{			
 				addEventListener(MouseEvent.MOUSE_UP, onMouseUpHandler);
-				
-				libraryDir.addEventListener(Event.SELECT, onSelectDirectoryHandler);
-				libraryDir.browseForDirectory("Toto");
-			}
-			
-			protected function onSelectDirectoryHandler(event : Event) : void
-			{
-				LibraryController.loadFromDir(File(event.target));
-				LibraryController.populateView();	
 			}
 			
 			protected function onMouseUpHandler(event : MouseEvent) : void

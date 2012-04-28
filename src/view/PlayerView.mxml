@@ -2,8 +2,7 @@
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
 		 xmlns:s="library://ns.adobe.com/flex/spark"
 		 xmlns:mx="library://ns.adobe.com/flex/mx"
-		 height="70"
-		 creationComplete="creationCompleteHandler(event)">
+		 height="70" creationComplete="creationCompleteHandler(event)">
 	
 	<fx:Declarations>
 		<fx:Boolean id="draggingTrackSlide">false</fx:Boolean>
@@ -11,6 +10,8 @@
 	
 	<fx:Script>
 		<![CDATA[
+			import config.TrackflexConfig;
+			
 			import controller.PlayerController;
 			
 			import mx.events.FlexEvent;
@@ -84,6 +85,18 @@
 				PlayerController.next();
 			}
 			
+			protected function random_clickHandler(event : MouseEvent) : void
+			{
+				TrackflexConfig.random = !TrackflexConfig.random;
+				trace ("random", TrackflexConfig.random);
+			}
+			
+			protected function loop_clickHandler(event : MouseEvent) : void
+			{
+				TrackflexConfig.loop = ++TrackflexConfig.loop % 3;
+				trace ("loop", TrackflexConfig.loop);
+			}
+			
 		]]>
 	</fx:Script>
 	
@@ -107,16 +120,20 @@
 				  icon="@Embed('assets/icons/player_end.png')" verticalCenter="0"
 				  click="next_clickHandler(event)"/>
 		
-		<s:HSlider id="trackslide" left="300" width="70%" maximum="1" minimum="0" stepSize="0.001"
+		<s:HSlider id="trackslide" left="300" width="68%" maximum="1" minimum="0" stepSize="0.001"
 				   verticalCenter="16" change="trackslide_changeHandler(event)"/>
 		
 		<s:HSlider id="volumeslide" right="10" width="70" change="volumeslide_changeHandler(event)"
 				   maximum="100" minimum="0" value="100" verticalCenter="0"/>
 		<s:Image id="volumeicon" right="74" width="56" height="28"
 				 source="@Embed('assets/volume-icone.png')" verticalCenter="-3"/>
-		<s:Label id="time" left="205" width="87" height="25" fontFamily="Verdana" fontSize="14"
-				 text="0:00/0:00" textAlign="center" verticalAlign="middle" verticalCenter="0"/>
+		<s:Label id="time" left="205" width="87" height="15" fontFamily="Verdana" fontSize="14"
+				 text="0:00/0:00" textAlign="center" verticalAlign="middle" verticalCenter="-16"/>
 		<s:Label id="trackInfo" left="300" width="100%" height="15" fontFamily="Verdana" fontSize="14"
 				 verticalCenter="-16"/>
+		<s:Image id="loop" x="251" y="45" source="assets/icons/forward.gif" buttonMode="true"
+				 click="loop_clickHandler(event)"/>
+		<s:Image id="random" x="213" y="45" source="assets/icons/back.gif" buttonMode="true"
+				 click="random_clickHandler(event)"/>
 	</s:BorderContainer>
 </s:Group>
