@@ -58,11 +58,11 @@
 	<mx:TabNavigator right="0" top="48" bottom="203" width="20%"
 					 borderColor="0x000000">
 		<s:NavigatorContent width="100%" height="100%" label="Artist">
-			<view:LastfmInfoView x="0" y="0" width="100%" height="100%">
+			<view:LastfmInfoView id="infos" x="0" y="0" width="100%" height="100%">
 			</view:LastfmInfoView>
 		</s:NavigatorContent>
 		<s:NavigatorContent width="100%" height="100%" label="Lyrics">
-			<view:LyricsView x="0" y="0" width="100%" height="100%">
+			<view:LyricsView id="lyrics" x="0" y="0" width="100%" height="100%">
 			</view:LyricsView>
 		</s:NavigatorContent>
 	</mx:TabNavigator>

@@ -72,7 +72,6 @@
 				play.setStyle("icon", ASSET_PLAY);
 				playing = false;
 			}
-			
 		]]>
 	</fx:Script>
 	
