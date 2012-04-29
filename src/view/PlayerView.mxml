@@ -73,7 +73,7 @@
 				PlayerController.stop();
 				PlayerController.playing = false;
 			}
-			
+
 			protected function prev_clickHandler(event : MouseEvent) : void
 			{
 				PlayerController.previous();
@@ -84,6 +84,7 @@
 				PlayerController.next();
 			}
 			
+<<<<<<< HEAD
 			protected function random_clickHandler(event : MouseEvent) : void
 			{
 				TrackflexConfig.random = !TrackflexConfig.random;
@@ -96,6 +97,9 @@
 				trace ("loop", TrackflexConfig.loop);
 			}
 			
+=======
+
+>>>>>>> 5b1ec7edfd753ad8f2683357b94cf01433b38c6d
 		]]>
 	</fx:Script>
 	

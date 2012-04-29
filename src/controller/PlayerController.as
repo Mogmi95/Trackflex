@@ -17,11 +17,16 @@ package controller
 	
 	import mx.core.FlexGlobals;
 	
+	import view.LastfmInfoView;
+	import view.LyricsView;
 	import view.PlayerView;
 
 	public class PlayerController
 	{
 		private static var _view 			: PlayerView 		= FlexGlobals.topLevelApplication.player;
+		private static var _infoview 		: LastfmInfoView 	= FlexGlobals.topLevelApplication.infos;
+		private static var _lyricsview 		: LyricsView 		= FlexGlobals.topLevelApplication.lyrics;
+
 		
 		private static var _pausePoint		: Number			= 0.;
 		private static var _playing			: Boolean			= false;
@@ -42,7 +47,12 @@ package controller
 			_currentTrack = sound;
 			_view.time.text = "0:00/" + formatNumber(_currentTrack.length);
 			_view.trackslide.value = 0.;
-			
+			var artist : String = PlayerController.currentTrack.id3.artist;
+			var song : String = PlayerController.currentTrack.id3.songName;
+			_infoview.getArtistInfo(artist);
+			_infoview.artistName.text = artist;
+			//_lyricsview.getArtistSongLyric(artist,song);
+			//_lyricsview.Title.text = song;
 			play();
 		}
 		
@@ -56,6 +66,7 @@ package controller
 				_soundChannel =_currentTrack.play(_pausePoint);
 				_soundTransform = _soundChannel.soundTransform;
 				_currentTrack.addEventListener(SampleDataEvent.SAMPLE_DATA, onProgressHandler);
+				
 				
 				_view.play.setStyle("icon", PlayerView.ASSET_PAUSE);
 				_view.addEventListener(Event.ENTER_FRAME, onProgressHandler);

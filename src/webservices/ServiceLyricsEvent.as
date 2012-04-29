@@ -4,10 +4,15 @@ package webservices
 	
 	public class ServiceLyricsEvent extends Event
 	{
-		public function ServiceLyricsEvent()
+		static public const TRACK_GET_LYRICS:String = '';
+		public var result:XML;	
+		
+		
+		public function ServiceLyricsEvent(p_type:String, p_result:XML,
+										   p_bubbles:Boolean=false, p_cancelable:Boolean=false)
 		{
-			super();
-			
+			super(p_type, p_bubbles, p_cancelable);
+			result = new XML(p_result);
 		}
 	}
 }
