@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 xmlns:itemrenderer="view.itemrenderer.*"
+		 creationComplete="initList()">
+	<fx:Script>
+		<![CDATA[
+			import model.Album;
+			import model.Track;
+			
+			import mx.collections.ArrayCollection;
+			
+			public var trackList:ArrayCollection;
+			[Bindable]
+			public var albumList:ArrayCollection;
+			
+			public function initList(): void{
+				trackList = new ArrayCollection();
+				for(var i:int = 1; i < 13; i++){
+					trackList.addItem(new Track("Warp 1.9", "The Bloody Beetroots", i, "Romborama", "2.48"));
+				}
+				albumList = new ArrayCollection();
+				for(i = 1; i < 9; i++){
+					albumList.addItem(new Album("Romborama", "The Bloody Beetroots", "http://img90.imageshack.us/img90/2479/romborama1.jpg", trackList));
+				}
+			}
+			
+			public function onClick():void{
+				dispatchEvent(new Event("changeView"));
+			}
+
+		]]>
+	</fx:Script>
+
+	<fx:Declarations>
+		<!-- Placer ici les éléments non visuels (services et objets de valeur, par exemple). -->
+	</fx:Declarations>
+	
+	<fx:Metadata>
+		[Event(name="changeView", type="flash.events.Event")]
+	</fx:Metadata>
+	
+	<s:SkinnableContainer styleName="middleContainer" backgroundColor="0x666666">
+		<s:HGroup>
+			
+			<!-- Album list -->
+			<s:VGroup>
+				<s:Label text="The Bloody Beetroots" styleName="artistName" color="white" 
+						 fontSize="15" paddingLeft="18"/>
+				
+				<!-- Albums -->
+				<s:List dataProvider="{albumList}" height="220">
+					<s:itemRenderer>
+						<fx:Component>
+							<s:ItemRenderer>
+								<fx:Script>
+									<![CDATA[
+										public function OverEvent(event:MouseEvent):void{
+											albumName.setStyle("textDecoration", "underline");
+											albumName.setStyle("color", "#FF9900");
+										}
+										
+										public function OutEvent(event:MouseEvent):void{
+											albumName.setStyle("textDecoration", "none");
+											albumName.setStyle("color", "#8B8BF5");
+										}
+									]]>
+								</fx:Script>
+								<s:SkinnableContainer width="305" height="20" backgroundColor="0x666666">
+									<s:layout>
+										<s:HorizontalLayout/>
+									</s:layout>
+									<s:Image x="10" y="5" width="15" height="15" buttonMode="true"
+											 source="http://46.105.42.21:4040/icons/play.gif" styleName="play"/>
+									<s:Image x="34" y="5" width="15" height="15" buttonMode="true"
+											 source="http://46.105.42.21:4040/icons/add.gif" styleName="add"/>
+									<s:Label id="albumName" x="66" buttonMode="true" click="outerDocument.onClick()" color="#8B8BF5"
+											 styleName="artistName" text="{data.name}" verticalCenter="1" rollOver="OverEvent(event)"
+											 rollOut="OutEvent(event)"/>
+								</s:SkinnableContainer>
+							</s:ItemRenderer>
+						</fx:Component>
+					</s:itemRenderer>
+				</s:List>
+			</s:VGroup>
+		</s:HGroup>
+	</s:SkinnableContainer>
+</s:Group>

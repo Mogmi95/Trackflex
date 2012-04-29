@@ -46,6 +46,14 @@
 				TrackflexConfig.save();
 			}
 			
+			protected function onChangeViewToTrack(event : Event):void{
+				viewStack.selectedIndex = 0;
+			}
+			
+			protected function onChangeViewToAlbum(event : Event):void{
+				viewStack.selectedIndex = 1;
+			}
+			
 		]]>
 	</fx:Script>
 	
@@ -76,4 +84,12 @@
 			</view:LyricsView>
 		</s:NavigatorContent>
 	</mx:TabNavigator>
+	<mx:ViewStack id="viewStack" x="160" y="80" selectedIndex="1">
+		<s:NavigatorContent id="TracksView">
+			<view:TracksView changeView="onChangeViewToAlbum(event)"/>
+		</s:NavigatorContent>
+		<s:NavigatorContent id="AlbumsView">
+			<view:AlbumsView changeView="onChangeViewToTrack(event)"/>
+		</s:NavigatorContent>
+	</mx:ViewStack>
 </s:WindowedApplication>
