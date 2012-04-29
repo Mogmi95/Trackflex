@@ -49,11 +49,11 @@
 		]]>
 	</fx:Script>
 	
-	<minko:VisualizerView left="250" right="250" top="70" bottom="225"/>
+	<minko:VisualizerView left="200" right="200" top="70" bottom="225"/>
 	
 	<view:PlayerView id="player" y="0" right="0" width="100%" height="70">
 	</view:PlayerView>
-	<mx:TabNavigator left="250" right="0" bottom="0" height="225" borderColor="0x000000">
+	<mx:TabNavigator left="200" right="0" bottom="0" height="225" borderColor="0x000000">
 		<s:NavigatorContent width="100%" height="100%" label="Playlist">
 			<view:PlaylistView id="playlist" x="0" y="0" width="100%" height="100%">
 			</view:PlaylistView>
@@ -63,9 +63,9 @@
 			</view:EqualizerView>
 		</s:NavigatorContent>
 	</mx:TabNavigator>
-	<view:LibraryView id="library" x="0" top="69" bottom="0" width="250">
+	<view:LibraryView id="library" x="0" top="69" bottom="0" width="200">
 	</view:LibraryView>
-	<mx:TabNavigator right="0" top="48" bottom="203" width="250"
+	<mx:TabNavigator right="0" top="48" bottom="203" width="200"
 					 borderColor="0x000000">
 		<s:NavigatorContent width="100%" height="100%" label="Artist">
 			<view:LastfmInfoView id="infos" x="0" y="0" width="100%" height="100%">

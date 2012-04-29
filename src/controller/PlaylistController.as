@@ -68,7 +68,8 @@ package controller
 			{
 				_currentPos = 0;
 			}
-			PlayerController.currentTrack = _playlist[_currentPos];
+			if (TrackflexConfig.loop != TrackflexConfig.NO_LOOP && _playlist.length != 0)
+				PlayerController.currentTrack = _playlist[_currentPos];
 			_view.grid.selectedIndex = _currentPos;
 		}
 		
@@ -85,7 +86,8 @@ package controller
 			{
 				_currentPos = _playlist.length - 1;
 			}
-			PlayerController.currentTrack = _playlist[_currentPos];
+			if (TrackflexConfig.loop != TrackflexConfig.NO_LOOP  && _playlist.length != 0)
+				PlayerController.currentTrack = _playlist[_currentPos];
 			_view.grid.selectedIndex = _currentPos;
 		}
 		
