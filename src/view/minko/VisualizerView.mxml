@@ -39,16 +39,14 @@
 			private var _light		: DirectionalLight	= new DirectionalLight(0xffffff, 0.6, 0.1, 64, new Vector4(1, -1, 1));
 			private var _ambiant 	: AmbientLight		= new AmbientLight(0x888888);
 			private var _scene 		: StyleGroup		= new StyleGroup(_camera, _light, _ambiant);
-			private var _cube		: TransformGroup	= null;
+			private var _point		: Point				= new Point();
 			
 			protected function creationCompleteHandler(event : FlexEvent ) : void
 			{
-				_cube = new TransformGroup(new SphereMesh(40));
 				_scene.addChild(new aerys.minko.scene.node.group.Group(
 					_camera,
 					new SoundNode(),
-					new ColorTexture(0x00ff00),
-					_cube
+					new SphereMesh(40)
 				));
 				
 				_viewport.defaultEffect = new SoundEffect();
@@ -64,12 +62,24 @@
 				viewportContainer.addChild(_viewport);
 				
 				_viewport.addEventListener(Event.ENTER_FRAME, enterFrameHandler);
+				_viewport.addEventListener(MouseEvent.MOUSE_MOVE, mouseMoveHandler);
 			}
 			
 			protected function enterFrameHandler(event : Event) : void
 			{
-				_cube.transform.appendRotation(Math.PI / 100, ConstVector4.Y_AXIS);
 				_viewport.render(_scene);
+			}
+			
+			private function mouseMoveHandler(event : MouseEvent) : void
+			{
+				if (event.buttonDown)
+				{
+					_camera.rotation.y += (_point.x - event.localX) * .01;
+					_camera.rotation.x += (_point.y - event.localY) * .01;
+				}
+				
+				_point.x = event.localX;
+				_point.y = event.localY;
 			}
 		]]>
 	</fx:Script>

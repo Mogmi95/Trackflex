@@ -11,7 +11,7 @@
 				var libraryDir	: File	= new File();
 
 				libraryDir.addEventListener(Event.SELECT, onSelectDirectoryHandler);
-				libraryDir.browseForDirectory("Toto");
+				libraryDir.browseForDirectory("Select a new library");
 			}
 			
 			protected function onSelectDirectoryHandler(event : Event) : void

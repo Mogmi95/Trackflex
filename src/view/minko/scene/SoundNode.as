@@ -8,7 +8,7 @@ package view.minko.scene
 
 	public class SoundNode extends AbstractScene
 	{
-		protected static const LIGHT_DATA : Factory	= Factory.getFactory(SoundData);
+		protected static const SOUND_DATA : Factory	= Factory.getFactory(SoundData);
 		
 		public function SoundNode()
 		{
@@ -19,7 +19,7 @@ package view.minko.scene
 		
 		public function getSoundData(transformData : TransformData) : SoundData
 		{
-			var sd : SoundData = LIGHT_DATA.create(true) as SoundData;
+			var sd : SoundData = SOUND_DATA.create(true) as SoundData;
 			
 			return sd;
 		}

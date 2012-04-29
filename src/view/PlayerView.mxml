@@ -30,7 +30,6 @@
 					return;
 				
 				PlayerController.play();
-				PlayerController.playing = !PlayerController.playing;
 			}
 			
 			protected function volumeslide_changeHandler(event : Event) : void
@@ -120,8 +119,8 @@
 				  icon="@Embed('assets/icons/player_end.png')" verticalCenter="0"
 				  click="next_clickHandler(event)"/>
 		
-		<s:HSlider id="trackslide" left="300" width="67%" maximum="1" minimum="0" stepSize="0.001"
-				   verticalCenter="16" change="trackslide_changeHandler(event)"/>
+		<s:HSlider id="trackslide" left="300" right="275" change="trackslide_changeHandler(event)"
+				   maximum="1" minimum="0" stepSize="0.001" verticalCenter="16"/>
 		
 		<s:HSlider id="volumeslide" right="10" width="70" change="volumeslide_changeHandler(event)"
 				   maximum="100" minimum="0" value="100" verticalCenter="0"/>

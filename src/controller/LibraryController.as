@@ -1,7 +1,9 @@
 package controller
 {	
+	import config.TrackflexConfig;
+	
 	import flash.filesystem.File;
-	import flash.utils.Dictionary;		
+	import flash.utils.Dictionary;
 	
 	import mx.controls.Label;
 	import mx.core.FlexGlobals;
@@ -32,6 +34,7 @@ package controller
 				_dirList.push(subdir.name);
 			}
 			_dirList.sort(Array.CASEINSENSITIVE);
+			TrackflexConfig.libraryDir = _libPath;
 		}
 		
 		public static function populateView() : void

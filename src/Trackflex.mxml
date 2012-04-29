@@ -4,7 +4,8 @@
 					   xmlns:mx="library://ns.adobe.com/flex/mx"
 					   xmlns:view="view.*"
 					   width="800" height="600" backgroundColor="0x666666"
-					   creationComplete="onCreationCompleteHandler(event)" xmlns:minko="view.minko.*">
+					   creationComplete="onCreationCompleteHandler(event)" xmlns:minko="view.minko.*"
+					   closing="closingHandler(event)">
 	
 	<fx:Declarations>
 		<!-- Placer ici les éléments non visuels (services et objets de valeur, par exemple). -->
@@ -12,12 +13,22 @@
 	
 	<fx:Script>
 		<![CDATA[
-			import controller.LibraryController;
-			import controller.PlayerController;
+			import config.TrackflexConfig;
+			
 			import mx.events.FlexEvent;
+			import mx.graphics.shaderClasses.ExclusionShader;
 
 			protected function onCreationCompleteHandler(event : FlexEvent) : void
 			{			
+				try
+				{
+					TrackflexConfig.load();
+				}
+				catch (e : IOError)
+				{
+					trace("Error while loading settings");
+				}
+				
 				addEventListener(MouseEvent.MOUSE_UP, onMouseUpHandler);
 			}
 			
@@ -27,6 +38,12 @@
 				{
 					player.onThumbMouseUpHandler(event);
 				}
+			}
+			
+			protected function closingHandler(event : Event) : void
+			{
+				trace("closing");
+				TrackflexConfig.save();
 			}
 			
 		]]>
