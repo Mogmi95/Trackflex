@@ -2,24 +2,18 @@ package model
 {
 	public class Track
 	{
-		private var _title 	: String;
-		private var _length	: int;
-		private var _album 	: Album;
-		private var _artist	: Artist;
-		
-		public function Track()
-		{
+		public var name:String;
+		public var artist:String;
+		public var number:int;
+		public var album:String;
+		public var length:String;
+				
+		public function Track(name:String, artist:String, number:int, album:String, length:String){
+			this.name = name;
+			this.artist = artist;
+			this.number = number;
+			this.album = album;
+			this.length = length;
 		}
-
-		public function get title() : String 	{ return _title; }
-		public function get length() : int 		{ return _length; }
-		public function get album() : Album 	{ return _album; }
-		public function get artist() : Artist 	{ return _artist; }
-
-		public function set title(value : String) 	: void 	{ _title = value; }
-		public function set length(value : int) 	: void 	{ _length = value; }
-		public function set album(value : Album) 	: void 	{ _album = value; }
-		public function set artist(value : Artist) 	: void 	{ _artist = value; }
-
 	}
 }

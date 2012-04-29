@@ -6,6 +6,7 @@ package controller
 	import flash.filesystem.File;
 	import flash.media.Sound;
 	import flash.media.SoundChannel;
+	import flash.media.SoundMixer;
 	import flash.media.SoundTransform;
 	import flash.net.URLRequest;
 	
@@ -27,33 +28,58 @@ package controller
 		
 		private static var _pausePoint		: Number			= 0.;
 		private static var _playing			: Boolean			= false;
-		private static var _currentTrack	: Sound;
-		private static var _soundChannel	: SoundChannel;
-		private static var _soundTransform	: SoundTransform;
+		private static var _currentTrack	: Sound				= null;
+		private static var _soundChannel	: SoundChannel		= null;
+		private static var _soundTransform	: SoundTransform	= null;
 		
 		public static function get currentTrack()	: Sound	{ return _currentTrack; }
 		
 		public static function set pausePoint(value : Number)	: void 	{ _pausePoint = value; }
+		public static function set currentTrack(sound : Sound) : void
+		{
+			if (_playing)
+				stop();
+			
+			_currentTrack = sound;
+			_view.time.text = "0:00/" + formatNumber(_currentTrack.length);
+			_view.trackslide.value = 0.;
+			var artist : String = PlayerController.currentTrack.id3.artist;
+			var song : String = PlayerController.currentTrack.id3.songName;
+			_infoview.getArtistInfo(artist);
+			_infoview.artistName.text = artist;
+			//_lyricsview.getArtistSongLyric(artist,song);
+			//_lyricsview.Title.text = song;
+			play();
+		}
 		
 		public static function play() : void
 		{
-			if (!_playing)
+			if (_currentTrack == null)
+				return;
+			
+			if (!_playing )
 			{
 				_soundChannel =_currentTrack.play(_pausePoint);
 				_soundTransform = _soundChannel.soundTransform;
 				_currentTrack.addEventListener(SampleDataEvent.SAMPLE_DATA, onProgressHandler);
 				
+				
+				_view.play.setStyle("icon", PlayerView.ASSET_PAUSE);
 				_view.addEventListener(Event.ENTER_FRAME, onProgressHandler);
 				
 				_soundTransform.volume = _view.volumeslide.value / 100;
 				_soundChannel.soundTransform = _soundTransform;
+				_soundChannel.addEventListener(Event.SOUND_COMPLETE, soundCompleteHandler);
 			}
 			else
 			{
 				_soundChannel.stop();
-				
+				_view.play.setStyle("icon", PlayerView.ASSET_PLAY);
 				_view.removeEventListener(Event.ENTER_FRAME, onProgressHandler);
 			}
+			
+			_view.trackInfo.text = (_currentTrack.id3.artist == null ? "undefined" : _currentTrack.id3.artist)
+				+ " - " + (_currentTrack.id3.songName == null ? "undefined" : _currentTrack.id3.songName);
 			_playing = !_playing;
 		}
 		
@@ -66,8 +92,9 @@ package controller
 				_playing = false;
 				refreshTime();
 				_view.trackslide.value = 0.;
-				
+				_view.play.setStyle("icon", PlayerView.ASSET_PLAY);
 				_view.removeEventListener(Event.ENTER_FRAME, onProgressHandler);
+				_view.trackInfo.text = "";
 			}
 		}
 		
@@ -78,12 +105,6 @@ package controller
 				_soundTransform.volume = vol;
 				_soundChannel.soundTransform = _soundTransform;
 			}
-		}
-		
-		public static function setCurrentTrack(pathName : String) : void
-		{
-			_currentTrack = new Sound(new URLRequest(pathName));
-			_currentTrack.addEventListener(Event.COMPLETE, onCompleteHandler);
 		}
 		
 		public static function refreshTime() : void
@@ -123,18 +144,19 @@ package controller
 			_view.trackslide.value = _pausePoint * 100 / _currentTrack.length / 100;
 		}
 		
-		private static function onCompleteHandler(event : Event) : void
+		public static function next() : void
 		{
-			_view.time.text = "0:00/" + formatNumber(_currentTrack.length);
-			_view.trackslide.value = 0.;
-			var artist : String = PlayerController.currentTrack.id3.artist;
-			var song : String = PlayerController.currentTrack.id3.songName;
-			//_lyricsview.getArtistSongLyric(artist,song);
-			//_lyricsview.Title.text = song;
-			_infoview.getArtistInfo(artist);
-			_infoview.artistName.text = artist;
-			
-			_currentTrack.removeEventListener(Event.COMPLETE, onCompleteHandler);
+			PlaylistController.nextTrack();
+		}
+		
+		public static function previous() : void
+		{
+			PlaylistController.prevTrack();
+		}
+		
+		private static function soundCompleteHandler(event : Event) : void
+		{
+			next();
 		}
 	}
 }

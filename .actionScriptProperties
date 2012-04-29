@@ -24,8 +24,13 @@
   <flashCatalyst validateFlashCatalystCompatibility="false"/>
   <buildTargets>
     <buildTarget buildTargetName="default">
-      <airSettings airCertificatePath="" airTimestamp="true" anePathSet="false" version="1">
-        <airExcludes/>
+      <airSettings airCertificatePath="C:/Users/roulyo/Documents/certifflex.p12" airTimestamp="true" anePathSet="true" version="1">
+        <airExcludes>
+          <pathEntry path="view"/>
+          <pathEntry path="controller"/>
+          <pathEntry path="model"/>
+          <pathEntry path="events"/>
+        </airExcludes>
         <anePaths/>
       </airSettings>
       <actionScriptSettings version="1"/>
@@ -33,4 +38,7 @@
   </buildTargets>
 </actionScriptProperties>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 20808110251b82895cd1f7b9f6316e6b468b1e54

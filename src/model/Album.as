@@ -1,23 +1,22 @@
 package model
 {
+	import mx.collections.ArrayCollection;
+	import mx.core.FlexGlobals;
+	import mx.controls.Label;
+	
 	public class Album
 	{
-		private var _trackList	: Vector.<Track>;
-		private var _artist		: Artist;
-		private var _title		: String;
+		public var name:String;
+		public var artist:String;
+		public var img:String;
+		public var tracks:ArrayCollection;
 		
-		public function Album()
+		public function Album(name:String, artist:String, img:String, tracks:ArrayCollection)
 		{
-			_trackList = new Vector.<Track>();
+			this.name = name;
+			this.artist = artist;
+			this.img = img;
+			this.tracks = tracks;
 		}
-
-		public function get trackList() : Vector.<Track>	{ return _trackList; }
-		public function get artist() 	: Artist 			{ return _artist; }
-		public function get title() 	: String 			{ return _title; }
-
-		public function set trackList(value : Vector.<Track>) 	: void	{ _trackList = value; }
-		public function set artist(value : Artist) 				: void 	{ _artist = value; }
-		public function set title(value : String) 				: void 	{ _title = value; }
-
 	}
 }

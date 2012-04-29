@@ -1,0 +1,89 @@
+package controller
+{
+	import flash.events.Event;
+	import flash.media.ID3Info;
+	import flash.media.Sound;
+	import flash.net.URLRequest;
+	
+	import mx.collections.ArrayList;
+	import mx.collections.IList;
+	import mx.core.FlexGlobals;
+	
+	import view.PlaylistView;
+	import view.itemrenderer.TrackButtonRenderer;
+
+	public class PlaylistController
+	{
+		private static var _view		: PlaylistView		= FlexGlobals.topLevelApplication.playlist;
+		
+		private static var _playlist	: Vector.<Sound>	= new Vector.<Sound>();
+		private static var _currentPos	: int				= 0;
+		
+		public static function addTrack(path : String) : void
+		{
+			var sound 	: Sound	= new Sound();
+			
+			sound.addEventListener(Event.COMPLETE, onCompleteHandler);
+			sound.load(new URLRequest(path));
+		}
+		
+		public static function play(pos : int) : void
+		{
+			_currentPos = pos;
+			PlayerController.currentTrack = _playlist[_currentPos];
+		}
+		
+		public static function removeTrack(index : int) : void
+		{
+			var l	: int	=  _playlist.length - 1;
+			
+			for (var i : int = index; i < l; ++i)
+			{
+				_playlist[i] = _playlist[i + 1];
+			}
+			--_playlist.length;
+			
+		}
+		
+		public static function swapTrack(index1 : int, index2 : int) : void
+		{
+			var tmp	: Sound	= _playlist[index1];
+			
+			_playlist[index1] = _playlist[index2];
+			_playlist[index2] = tmp;
+		}
+		
+		public static function nextTrack() : void
+		{
+			if (_currentPos < _playlist.length - 1)
+			{
+				++_currentPos;
+				PlayerController.currentTrack = _playlist[_currentPos];
+				_view.grid.selectedIndex = _currentPos;
+			}
+		}
+		
+		public static function prevTrack() : void
+		{
+			if (_currentPos > 0)
+			{
+				--_currentPos;
+				PlayerController.currentTrack = _playlist[_currentPos];
+				_view.grid.selectedIndex = _currentPos;
+			}
+		}
+		
+		private static function onCompleteHandler(event : Event) : void
+		{
+			var sound 	: Sound = Sound(event.currentTarget);
+			var track	: Object = { button : new TrackButtonRenderer(),
+								  	 title : sound.id3.songName == null ? "undefined" : sound.id3.songName,
+									 artist : sound.id3.artist == null ? "undefined" : sound.id3.artist,
+									 album : sound.id3.album == null ? "undefined" : sound.id3.album};
+			
+			IList(_view.grid.dataProvider).addItem(track);
+			_playlist.push(sound);
+			sound.removeEventListener(Event.COMPLETE, onCompleteHandler);
+		}
+	}
+}

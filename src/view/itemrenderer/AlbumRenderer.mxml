@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" 
+				autoDrawBackground="true">
+	
+	<fx:Script>
+		<![CDATA[
+			public function OverEvent(event:MouseEvent):void{
+				albumName.setStyle("textDecoration", "underline");
+				albumName.setStyle("color", "#FF9900");
+			}
+			
+			public function OutEvent(event:MouseEvent):void{
+				albumName.setStyle("textDecoration", "none");
+				albumName.setStyle("color", "#8B8BF5");
+			}
+		]]>
+	</fx:Script>
+	
+	<s:layout>
+		<s:HorizontalLayout/>
+	</s:layout>
+	<s:SkinnableContainer width="305" height="20" backgroundColor="0x666666">
+		<s:Image x="10" y="5" width="15" height="15" buttonMode="true"
+				 source="http://46.105.42.21:4040/icons/play.gif" styleName="play"/>
+		<s:Image x="34" y="5" width="15" height="15" buttonMode="true"
+				 source="http://46.105.42.21:4040/icons/add.gif" styleName="add"/>
+			<s:Label id="albumName" x="66" buttonMode="true" click="currentState='tracks'" color="#8B8BF5"
+					  styleName="artistName" text="{data.name}" verticalCenter="1" rollOver="OverEvent(event)"
+					  rollOut="OutEvent(event)"/>
+	</s:SkinnableContainer>
+</s:ItemRenderer>

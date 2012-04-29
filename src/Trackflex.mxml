@@ -9,9 +9,8 @@
 		<![CDATA[
 			import controller.LibraryController;
 			import controller.PlayerController;
-			
 			import mx.events.FlexEvent;
-			
+
 			protected function onCreationCompleteHandler(event : FlexEvent) : void
 			{
 				var libraryDir	: File	= new File();
@@ -19,12 +18,13 @@
 				addEventListener(MouseEvent.MOUSE_UP, onMouseUpHandler);
 				
 				libraryDir.addEventListener(Event.SELECT, onSelectDirectoryHandler);
-				libraryDir.browse();
+				libraryDir.browseForDirectory("Toto");
 			}
 			
 			protected function onSelectDirectoryHandler(event : Event) : void
 			{
-				PlayerController.setCurrentTrack(File(event.target).nativePath);
+				LibraryController.loadFromDir(File(event.target));
+				LibraryController.populateView();	
 			}
 			
 			protected function onMouseUpHandler(event : MouseEvent) : void
@@ -45,7 +45,7 @@
 	<mx:TabNavigator right="0" bottom="0" width="80%" height="225"
 					 borderColor="0x000000">
 		<s:NavigatorContent width="100%" height="100%" label="Playlist">
-			<view:PlaylistView x="0" y="0" width="100%" height="100%">
+			<view:PlaylistView id="playlist" x="0" y="0" width="100%" height="100%">
 			</view:PlaylistView>
 		</s:NavigatorContent>
 		<s:NavigatorContent width="100%" height="100%" label="Equalizer">
@@ -53,8 +53,8 @@
 			</view:EqualizerView>
 		</s:NavigatorContent>
 	</mx:TabNavigator>
-	<view:TrackCollectionView x="0" top="69" bottom="0" width="20%">
-	</view:TrackCollectionView>
+	<view:LibraryView id="library" x="0" top="69" bottom="0" width="20%">
+	</view:LibraryView>
 	<mx:TabNavigator right="0" top="48" bottom="203" width="20%"
 					 borderColor="0x000000">
 		<s:NavigatorContent width="100%" height="100%" label="Artist">
@@ -66,4 +66,6 @@
 			</view:LyricsView>
 		</s:NavigatorContent>
 	</mx:TabNavigator>
+	<view:MainView x="160" y="78" width="100%" height="100%">
+	</view:MainView>
 </s:WindowedApplication>
