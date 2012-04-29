@@ -84,7 +84,6 @@
 				PlayerController.next();
 			}
 			
-<<<<<<< HEAD
 			protected function random_clickHandler(event : MouseEvent) : void
 			{
 				TrackflexConfig.random = !TrackflexConfig.random;
@@ -96,10 +95,6 @@
 				TrackflexConfig.loop = ++TrackflexConfig.loop % 3;
 				trace ("loop", TrackflexConfig.loop);
 			}
-			
-=======
-
->>>>>>> 5b1ec7edfd753ad8f2683357b94cf01433b38c6d
 		]]>
 	</fx:Script>
 	
