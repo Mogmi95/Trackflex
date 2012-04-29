@@ -49,7 +49,7 @@
 		]]>
 	</fx:Script>
 	
-	<minko:VisualizerView left="200" right="200" top="70" bottom="225"/>
+	<minko:VisualizerView left="200" right="200" top="85" bottom="225"/>
 	
 	<view:PlayerView id="player" y="0" right="0" width="100%" height="70">
 	</view:PlayerView>

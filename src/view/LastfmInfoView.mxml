@@ -33,8 +33,9 @@
 				var url:String = event.target.url as String;
 				if (url.search("getinfo") != -1) {
 					var jacquetteList:XMLList = xmlData.artist.image as XMLList;
+					var bio:String = xmlData.artist.bio.summary;
 					jacquette = jacquetteList[3];
-					artistBio.text = xmlData.artist.bio.summary;
+					artistBio.text = bio.replace(new RegExp("<[^<]+?>", "gi"), "");
 				} 
 			}
 			private function handleFault(event:FaultEvent):void {
@@ -50,7 +51,8 @@
 			
 			private function HandleArtistInfo(event:ServiceLastFMEvent):void {
 				var xmlData : XML = event.result;
-				artistBio.text = xmlData.lfm.artist.bio.summary;
+				var bio:String = xmlData.artist.bio.summary;
+				artistBio.text = bio.replace(new RegExp("<[^<]+?>", "gi"), "");
 				var jacquetteList:XMLList = xmlData.artist.image as XMLList;
 				artistImg.source = jacquetteList[3];
 			}
@@ -63,9 +65,9 @@
 			<s:Group width="100%" height="100%">
 				<s:Image id="artistImg" y="10" right="10" width="126" height="126"
 						 source="{jacquette}"/>
-				<s:Label id="artistBio" left="10" right="10" top="170" bottom="10">
+				<s:Label id="artistBio" left="10" right="10" top="160" bottom="10">
 				</s:Label>
-				<s:Label id="artistName" left="10" right="10" top="140" height="30" fontSize="16"
+				<s:Label id="artistName" left="10" right="10" top="140" height="20" fontSize="16"
 						 fontWeight="bold" text="Artist" textAlign="right" verticalAlign="middle"/>
 			</s:Group>
 		</s:Scroller>

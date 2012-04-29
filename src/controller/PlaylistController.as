@@ -62,13 +62,18 @@ package controller
 				if (TrackflexConfig.random && TrackflexConfig.loop != TrackflexConfig.LOOP_ONE)
 					_currentPos = randomize();
 				else if (TrackflexConfig.loop == TrackflexConfig.NO_LOOP)
-					++_currentPos;
+					++_currentPos
 			}
 			else if (TrackflexConfig.loop == TrackflexConfig.LOOP_ALL)
 			{
-				_currentPos = 0;
+				_currentPos = 0;	
 			}
-			if (TrackflexConfig.loop != TrackflexConfig.NO_LOOP && _playlist.length != 0)
+			else if (TrackflexConfig.loop == TrackflexConfig.NO_LOOP)
+			{
+				return;
+			}
+			
+			if (_playlist.length != 0)
 				PlayerController.currentTrack = _playlist[_currentPos];
 			_view.grid.selectedIndex = _currentPos;
 		}
@@ -86,7 +91,12 @@ package controller
 			{
 				_currentPos = _playlist.length - 1;
 			}
-			if (TrackflexConfig.loop != TrackflexConfig.NO_LOOP  && _playlist.length != 0)
+			else if (TrackflexConfig.loop == TrackflexConfig.NO_LOOP)
+			{
+				return;
+			}
+			
+			if (_playlist.length != 0)
 				PlayerController.currentTrack = _playlist[_currentPos];
 			_view.grid.selectedIndex = _currentPos;
 		}
