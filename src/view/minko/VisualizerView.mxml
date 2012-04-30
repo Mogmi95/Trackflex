@@ -51,7 +51,8 @@
 				
 				_viewport.defaultEffect = new SoundEffect();
 				
-				_camera.distance = 3.;
+				_camera.distance = 2;
+				_camera.rotation.x -= .3;
 				
 				_scene.style.set(LightingStyle.LIGHTS_ENABLED, true)
 					  .set(LightingStyle.CAST_SHADOWS, true)

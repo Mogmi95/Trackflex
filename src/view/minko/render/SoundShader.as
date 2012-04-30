@@ -19,7 +19,7 @@ package view.minko.render
 			var y			: SValue	= multiply(100, absolute(multiply(2., vertexPosition.y)));
 			var spectrum	: SValue	= getWorldParameter(256, SoundData, SoundData.SOUND_SPECTRUM);	
 			var fqValue		: SValue	= copy(getConstantByIndex(spectrum, y));
-			var c			: SValue 	= multiply(2., add(1., fqValue));
+			var c			: SValue 	= add(1., fqValue);
 			
 			_pos = float4(multiply(vertexPosition.x, c.x),
 						  multiply(vertexPosition.y, c.x),
@@ -32,8 +32,15 @@ package view.minko.render
 		override protected function getOutputColor() : SValue
 		{
 			var dp3camerapos	: SValue	= negate(dotProduct3(normalize(_pos), cameraLocalDirection));
+			var dist			: SValue 	= null;
+			var green			: SValue	= null;
+			var red				: SValue	= null;
 			
-			return float4(interpolate(multiply(dp3camerapos, float3(0., .5, 0.))), 1.);	
+			dist = sqrt(add(power(_pos.x, 2.), power(_pos.y, 2), power(_pos.z, 2)));
+			red = multiply(2., subtract(dist, .3));
+			green = subtract(1.5, dist);
+			
+			return float4(interpolate(multiply(dp3camerapos, float3(red, green, 0.))), 1.);	
 		}
 	}
 }

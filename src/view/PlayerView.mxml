@@ -138,19 +138,20 @@
 				  toolTip="Play next track"/>
 		
 		<s:HSlider id="trackslide" left="300" right="225" change="trackslide_changeHandler(event)"
-				   maximum="1" minimum="0" stepSize="0.001" verticalCenter="16"/>
+				   maximum="1" minimum="0" skinClass="graphite.skins.HSliderSkin" stepSize="0.001"
+				   verticalCenter="16"/>
 		
-		<s:HSlider id="volumeslide" right="10" width="70" change="volumeslide_changeHandler(event)"
-				   maximum="100" minimum="0" value="100" verticalCenter="0"/>
-		<s:Image id="volumeicon" right="74" width="56" height="28"
-				 source="@Embed('assets/volume-icone.png')" verticalCenter="-3"/>
-		<s:Label id="time" left="205" top="45" width="87" height="15" fontFamily="Verdana"
+		<s:HSlider id="volumeslide" right="10" width="113" change="volumeslide_changeHandler(event)"
+				   maximum="100" minimum="0" value="100" verticalCenter="-10"/>
+		<s:Image id="volumeicon" right="131" source="@Embed('assets/icons/player_sound_1.png')"
+				 verticalCenter="-13"/>
+		<s:Label id="time" left="205" top="39" width="87" height="15" fontFamily="Verdana"
 				 fontSize="14" text="-:--/-:--" textAlign="center" verticalAlign="middle"/>
-		<s:Label id="trackInfo" left="300" width="100%" height="15" fontFamily="Verdana" fontSize="14"
+		<s:Label id="trackInfo" left="300" right="180" height="15" fontFamily="Verdana" fontSize="14"
 				 verticalCenter="-16"/>
-		<s:Image id="loop" x="251" top="14" buttonMode="true" click="loop_clickHandler(event)"
+		<s:Image id="loop" x="251" top="7" buttonMode="true" click="loop_clickHandler(event)"
 				 source="{ASSET_NO_LOOP}" toolTip="Playlist looping (none/one/all)"/>
-		<s:Image id="random" x="213" top="14" buttonMode="true" click="random_clickHandler(event)"
+		<s:Image id="random" x="213" top="7" buttonMode="true" click="random_clickHandler(event)"
 				 source="{ASSET_NO_RANDOM}" toolTip="Activate/deactivate random playing"/>
 	</s:BorderContainer>
 </s:Group>

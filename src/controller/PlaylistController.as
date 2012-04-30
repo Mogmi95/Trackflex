@@ -61,7 +61,7 @@ package controller
 			{
 				if (TrackflexConfig.random && TrackflexConfig.loop != TrackflexConfig.LOOP_ONE)
 					_currentPos = randomize();
-				else if (TrackflexConfig.loop == TrackflexConfig.NO_LOOP)
+				else if (TrackflexConfig.loop == TrackflexConfig.NO_LOOP || TrackflexConfig.loop == TrackflexConfig.LOOP_ALL)
 					++_currentPos
 			}
 			else if (TrackflexConfig.loop == TrackflexConfig.LOOP_ALL)
@@ -84,7 +84,7 @@ package controller
 			{
 				if (TrackflexConfig.random && TrackflexConfig.loop != TrackflexConfig.LOOP_ONE)
 					_currentPos = randomize();
-				else if (TrackflexConfig.loop == TrackflexConfig.NO_LOOP)
+				else if (TrackflexConfig.loop == TrackflexConfig.NO_LOOP || TrackflexConfig.loop == TrackflexConfig.LOOP_ALL)
 					--_currentPos;
 			}
 			else if (TrackflexConfig.loop == TrackflexConfig.LOOP_ALL)
@@ -120,8 +120,6 @@ package controller
 			
 			while (newpos == _currentPos)
 				newpos = Math.floor(Math.random() * _playlist.length);
-			
-			trace(newpos);
 			
 			return newpos;
 		}
