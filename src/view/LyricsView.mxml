@@ -15,6 +15,7 @@
 			import mx.rpc.events.ResultEvent;
 			
 			private var API_ROOT:String = "http://api.chartlyrics.com/apiv1.asmx/SearchLyricDirect?";
+			private var resultdata:String = "";
 			
 			
 			public function getArtistSongLyric(artist : String, song : String):void {
@@ -25,8 +26,6 @@
 			
 			private function handleSuccess(event:ResultEvent):void {
 				var xmlData:XML = new XML(event.message.body);
-				Title.text =  PlayerController.currentTrack.id3.songName;
-				trace(event.result.GetLyricResult.Lyric);
 				 if (event.result.GetLyricResult.Lyric != null){
 					lyricsContent.text = event.result.GetLyricResult.Lyric;
 				 }
@@ -40,6 +39,7 @@
 				trace(event.cancelable);
 				trace(event.target);
 				trace(event.type);
+				lyricsContent.text = "Aucune donnée reçue du serveur Chartlyrics.com.";
 			}
 		]]>
 	</fx:Script>
