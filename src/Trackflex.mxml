@@ -18,6 +18,7 @@
 			import controller.ServiceController;
 			
 			import mx.events.FlexEvent;
+			import mx.events.IndexChangedEvent;
 			import mx.graphics.shaderClasses.ExclusionShader;
 
 			protected function onCreationCompleteHandler(event : FlexEvent) : void
@@ -47,6 +48,11 @@
 				TrackflexConfig.save();
 			}
 
+			protected function onChangeViewInfo(event:IndexChangedEvent):void{
+				var currentIndex:int=event.newIndex; 
+				ServiceController.handleChangeTab(currentIndex);
+			}
+			
 		]]>
 	</fx:Script>
 	
@@ -57,8 +63,9 @@
 
 	<view:LibraryView id="library" x="0" top="69" bottom="0" width="250">
 	</view:LibraryView>
+
 	<mx:TabNavigator right="0" top="48" bottom="225" width="250"
-					 borderColor="0x000000" change="ServiceController.handleChangeTab(event)">
+					 borderColor="0x000000" change="onChangeViewInfo(event)">
 		<s:NavigatorContent width="100%" height="100%" label="Artist">
 			<view:LastfmInfoView id="infos" x="0" y="0" width="100%" height="100%">
 			</view:LastfmInfoView>

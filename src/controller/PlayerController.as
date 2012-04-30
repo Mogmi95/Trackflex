@@ -47,12 +47,6 @@ package controller
 			_currentTrack = sound;
 			_view.time.text = "0:00/" + formatNumber(_currentTrack.length);
 			_view.trackslide.value = 0.;
-			var artist : String = PlayerController.currentTrack.id3.artist;
-			var song : String = PlayerController.currentTrack.id3.songName;
-			_infoview.getArtistInfo(artist);
-			_infoview.artistName.text = artist;
-			if (FlexGlobals.topLevelApplication.lyrics != null)
-				ServiceController.showLyric();
 			play();
 		}
 		
@@ -84,6 +78,7 @@ package controller
 			
 			_view.trackInfo.text = (_currentTrack.id3.artist == null ? "undefined" : _currentTrack.id3.artist)
 				+ " - " + (_currentTrack.id3.songName == null ? "undefined" : _currentTrack.id3.songName);
+			ServiceController.updateTabInfos();
 			_playing = !_playing;
 		}
 		
