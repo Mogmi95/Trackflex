@@ -19,7 +19,7 @@
 			private var API_ROOT:String = "http://ws.audioscrobbler.com/2.0/";
 			private var API_KEY:String = "7b36c2365fed1c01db36276aa86d89ba";
 			[Bindable]
-			private var jacquette:String = "../assets/default2.png"; 
+			private var jacquette:String = "../assets/unknown3.png"; 
 			
 			public function getArtistInfo(artist : String):void {
 				httpService.url = API_ROOT + "?method=artist.getinfo&artist=" + artist + "&api_key=" + API_KEY;

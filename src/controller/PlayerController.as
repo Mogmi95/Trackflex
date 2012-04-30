@@ -25,8 +25,6 @@ package controller
 	{
 		private static var _view 			: PlayerView 		= FlexGlobals.topLevelApplication.player;
 		private static var _infoview 		: LastfmInfoView 	= FlexGlobals.topLevelApplication.infos;
-		private static var _lyricsview 		: LyricsView 		= FlexGlobals.topLevelApplication.lyrics;
-
 		
 		private static var _pausePoint		: Number			= 0.;
 		private static var _playing			: Boolean			= false;
@@ -51,8 +49,8 @@ package controller
 			var song : String = PlayerController.currentTrack.id3.songName;
 			_infoview.getArtistInfo(artist);
 			_infoview.artistName.text = artist;
-			//_lyricsview.getArtistSongLyric(artist,song);
-			//_lyricsview.Title.text = song;
+			if (FlexGlobals.topLevelApplication.lyrics != null)
+				ServiceController.showLyric();
 			play();
 		}
 		
