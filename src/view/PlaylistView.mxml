@@ -34,7 +34,7 @@
 		
 		<s:Label x="0" y="0" width="83" height="25" text="   Clear all" textAlign="center"
 				 verticalAlign="middle"/>
-		<s:Image x="5" y="5" source="assets/icons/remove.gif"/>
+		<s:Image x="5" y="5" source="@Embed('assets/icons/remove.gif')"/>
 	</s:Group>
 
 </s:Group>
