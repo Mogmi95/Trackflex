@@ -1,8 +1,6 @@
 package model
 {
 	import mx.collections.ArrayCollection;
-	import mx.core.FlexGlobals;
-	import mx.controls.Label;
 	
 	public class Album
 	{

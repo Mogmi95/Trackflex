@@ -6,7 +6,6 @@
 		 creationComplete="initList()">
 	<fx:Script>
 		<![CDATA[
-			import model.Album;
 			import model.Track;
 			
 			import mx.collections.ArrayCollection;

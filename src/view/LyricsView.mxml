@@ -8,9 +8,6 @@
 	</fx:Declarations>
 	<fx:Script>
 		<![CDATA[
-			import controller.PlayerController;
-			
-			import mx.events.FlexEvent;
 			import mx.rpc.events.FaultEvent;
 			import mx.rpc.events.ResultEvent;
 			

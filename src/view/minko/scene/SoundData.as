@@ -3,10 +3,7 @@ package view.minko.scene
 	import aerys.minko.scene.data.IWorldData;
 	import aerys.minko.scene.data.StyleData;
 	import aerys.minko.scene.data.TransformData;
-	import aerys.minko.type.math.Vector4;
 	
-	import flash.media.SoundMixer;
-	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
 
 	public class SoundData implements IWorldData

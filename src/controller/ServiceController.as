@@ -1,10 +1,7 @@
 package controller
 {
 	
-	import flash.events.Event;
-	
 	import mx.core.FlexGlobals;
-	import mx.events.IndexChangedEvent;
 	
 	import view.LastfmInfoView;
 	import view.LyricsView;

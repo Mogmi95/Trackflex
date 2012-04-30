@@ -1,24 +1,14 @@
 package controller
 {
-	import config.TrackflexConfig;
-	
 	import flash.events.Event;
-	import flash.events.ProgressEvent;
 	import flash.events.SampleDataEvent;
-	import flash.filesystem.File;
 	import flash.media.Sound;
 	import flash.media.SoundChannel;
-	import flash.media.SoundMixer;
 	import flash.media.SoundTransform;
-	import flash.net.URLRequest;
-	
-	import flashx.textLayout.elements.GlobalSettings;
-	import flashx.textLayout.formats.Float;
 	
 	import mx.core.FlexGlobals;
 	
 	import view.LastfmInfoView;
-	import view.LyricsView;
 	import view.PlayerView;
 
 	public class PlayerController

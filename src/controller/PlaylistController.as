@@ -2,12 +2,8 @@ package controller
 {
 	import config.TrackflexConfig;
 	
-	import flash.events.Event;
-	import flash.media.ID3Info;
 	import flash.media.Sound;
-	import flash.net.URLRequest;
 	
-	import mx.collections.ArrayList;
 	import mx.collections.IList;
 	import mx.core.FlexGlobals;
 	

@@ -8,10 +8,7 @@
 	
 	<fx:Script>
 		<![CDATA[
-			import controller.LibraryController;
-			import controller.PlayerController;
 			
-			import mx.events.FlexEvent;
 			
 			protected function dataTooltipFormat(n : Number) : String
 			{

@@ -17,7 +17,6 @@
 	<fx:Script>
 		<![CDATA[
 			import controller.LibraryController;
-			import controller.PlayerController;
 			import controller.PlaylistController;
 			
 			import mx.core.UIComponent;

@@ -1,12 +1,7 @@
 package view.minko.render
 {
-	import aerys.minko.render.effect.basic.BasicStyle;
-	import aerys.minko.render.resource.TextureResource;
 	import aerys.minko.render.shader.ActionScriptShader;
-	import aerys.minko.render.shader.ActionScriptShaderPart;
 	import aerys.minko.render.shader.SValue;
-	import aerys.minko.render.shader.node.operation.manipulation.VariadicExtract;
-	import aerys.minko.type.math.Vector4;
 	
 	import view.minko.scene.SoundData;
 

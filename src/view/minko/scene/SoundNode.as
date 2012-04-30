@@ -3,8 +3,6 @@ package view.minko.scene
 	import aerys.minko.scene.data.TransformData;
 	import aerys.minko.scene.node.AbstractScene;
 	import aerys.minko.type.Factory;
-	
-	import flash.media.SoundMixer;
 
 	public class SoundNode extends AbstractScene
 	{
