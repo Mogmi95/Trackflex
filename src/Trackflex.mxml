@@ -15,6 +15,8 @@
 		<![CDATA[
 			import config.TrackflexConfig;
 			
+			import controller.ServiceController;
+			
 			import mx.events.FlexEvent;
 			import mx.graphics.shaderClasses.ExclusionShader;
 
@@ -49,7 +51,7 @@
 		]]>
 	</fx:Script>
 	
-	<minko:VisualizerView left="200" right="200" top="70" bottom="225"/>
+	<minko:VisualizerView left="200" right="200" top="85" bottom="225"/>
 	
 	<view:PlayerView id="player" y="0" right="0" width="100%" height="70">
 	</view:PlayerView>
@@ -66,7 +68,7 @@
 	<view:LibraryView id="library" x="0" top="69" bottom="0" width="200">
 	</view:LibraryView>
 	<mx:TabNavigator right="0" top="48" bottom="203" width="200"
-					 borderColor="0x000000">
+					 borderColor="0x000000" change="ServiceController.handleChangeTab(event)">
 		<s:NavigatorContent width="100%" height="100%" label="Artist">
 			<view:LastfmInfoView id="infos" x="0" y="0" width="100%" height="100%">
 			</view:LastfmInfoView>

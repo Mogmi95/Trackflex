@@ -122,16 +122,20 @@
 					   borderColor="0x000000">
 		<mx:Button id="prev" left="10" width="35" height="35" cornerRadius="90"
 				  icon="@Embed('assets/icons/player_prec.png')" verticalCenter="0"
-				  click="prev_clickHandler(event)"/>
+				  click="prev_clickHandler(event)"
+				  toolTip="Play previous track"/>
 		<mx:Button id="play" left="55" width="50" height="50" click="play_clickHandler(event)"
 				  cornerRadius="90" icon="{ASSET_PLAY}"
-				  verticalCenter="0"/>
+				  verticalCenter="0"
+				  toolTip="Play/pause track"/>
 		<mx:Button id="stop" left="115" width="35" height="35" click="stop_clickHandler(event)"
 				  cornerRadius="90" icon="@Embed('assets/icons/player_stop.png')"
-				  verticalCenter="0"/>
+				  verticalCenter="0"
+				  toolTip="Stop playing"/>
 		<mx:Button id="next" left="160" width="35" height="35" cornerRadius="90"
 				  icon="@Embed('assets/icons/player_next.png')" verticalCenter="0"
-				  click="next_clickHandler(event)"/>
+				  click="next_clickHandler(event)"
+				  toolTip="Play next track"/>
 		
 		<s:HSlider id="trackslide" left="300" right="225" change="trackslide_changeHandler(event)"
 				   maximum="1" minimum="0" stepSize="0.001" verticalCenter="16"/>
@@ -145,8 +149,10 @@
 		<s:Label id="trackInfo" left="300" width="100%" height="15" fontFamily="Verdana" fontSize="14"
 				 verticalCenter="-16"/>
 		<s:Image id="loop" x="251" y="45" source="{ASSET_NO_LOOP}" buttonMode="true"
-				 click="loop_clickHandler(event)"/>
+				 click="loop_clickHandler(event)"
+				 toolTip="Playlist looping (none/one/all)"/>
 		<s:Image id="random" x="213" y="45" source="{ASSET_NO_RANDOM}" buttonMode="true"
-				 click="random_clickHandler(event)"/>
+				 click="random_clickHandler(event)"
+				 toolTip="Activate/deactivate random playing"/>
 	</s:BorderContainer>
 </s:Group>

@@ -2,6 +2,7 @@ package controller
 {
 	
 	import flash.events.Event;
+	import mx.events.IndexChangedEvent; 
 	
 	import mx.core.FlexGlobals;
 	
@@ -26,8 +27,23 @@ package controller
 			var song : String = PlayerController.currentTrack.id3.songName;
 			_infoview.getArtistInfo(artist);
 			_infoview.artistName.text = artist;
+			
+		}
+		
+		public static function showLyric():void{
+			var artist : String = PlayerController.currentTrack.id3.artist;
+			var song : String = PlayerController.currentTrack.id3.songName;
+			
 			_lyricsview.getArtistSongLyric(artist,song);
-			_lyricsview.Title.text = song;
+		}
+		
+		public static function handleChangeTab(event:IndexChangedEvent):void{
+			var currentIndex:int=event.newIndex; 
+			
+			if (currentIndex == 1){
+				showLyric();
+			}
+		
 		}
 		
 		public static function onCompleteHandler(event : Event) : void{

@@ -51,8 +51,6 @@ package controller
 			var song : String = PlayerController.currentTrack.id3.songName;
 			_infoview.getArtistInfo(artist);
 			_infoview.artistName.text = artist;
-			//_lyricsview.getArtistSongLyric(artist,song);
-			//_lyricsview.Title.text = song;
 			play();
 		}
 		
