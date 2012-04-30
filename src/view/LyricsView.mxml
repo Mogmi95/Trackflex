@@ -26,20 +26,20 @@
 			private function handleSuccess(event:ResultEvent):void {
 				var xmlData:XML = new XML(event.message.body);
 				Title.text =  PlayerController.currentTrack.id3.songName;
-				trace(event.result.GetLyricResult.Lyric);
+				//trace(event.result.GetLyricResult.Lyric);
 				 if (event.result.GetLyricResult.Lyric != null){
 					lyricsContent.text = event.result.GetLyricResult.Lyric;
 				 }
 				 else
 				 {
-					 lyricsContent.text = "Lyric introuvable";
+					 lyricsContent.text = "Lyrics not found";
 				 }
 			}
 			private function handleFault(event:FaultEvent):void {
-				trace(event.message);
+/* 				trace(event.message);
 				trace(event.cancelable);
 				trace(event.target);
-				trace(event.type);
+				trace(event.type); */
 			}
 		]]>
 	</fx:Script>
@@ -49,10 +49,10 @@
 		<s:Scroller x="0" y="0" width="100%" height="100%" >
 
 				<s:Group width="100%" height="100%">
-					<s:Label id="Title" left="10" right="10" top="0" height="15%" fontSize="22" textAlign="left"
+					<s:Label id="Title" left="10" right="10" top="5" height="30" fontSize="22" textAlign="left"
 							 verticalAlign="middle" fontWeight="bold">
 					</s:Label>
-					<s:Label id="lyricsContent" left="10" right="10" bottom="0" height="85%" width="100%" >					</s:Label>
+					<s:Label id="lyricsContent" left="10" right="10" top="40" width="100%" >					</s:Label>
 				</s:Group>
 
 		</s:Scroller>

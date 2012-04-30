@@ -94,21 +94,36 @@
 			protected function random_clickHandler(event : MouseEvent) : void
 			{
 				TrackflexConfig.random = !TrackflexConfig.random;
+				updateRandomIcon();
+			}
+			
+			protected function loop_clickHandler(event : MouseEvent) : void
+			{
+				TrackflexConfig.loop = ++TrackflexConfig.loop % 3;
+				updateLoopIcon();
+			}
+			
+			public function updateRandomIcon() : void
+			{
 				if (TrackflexConfig.random)
 					random.source = ASSET_RANDOM;
 				else
 					random.source = ASSET_NO_RANDOM;
 			}
 			
-			protected function loop_clickHandler(event : MouseEvent) : void
+			public function updateLoopIcon() : void
 			{
-				TrackflexConfig.loop = ++TrackflexConfig.loop % 3;
 				if (TrackflexConfig.loop == TrackflexConfig.NO_LOOP)
 					loop.source = ASSET_NO_LOOP;
 				else if (TrackflexConfig.loop == TrackflexConfig.LOOP_ONE)
 					loop.source = ASSET_LOOP_ONE;
 				else
 					loop.source = ASSET_LOOP;
+			}
+			
+			private function volumeFormat(n : Number) : String
+			{
+				return n + "%";
 			}
 		]]>
 	</fx:Script>
@@ -137,12 +152,13 @@
 				  click="next_clickHandler(event)"
 				  toolTip="Play next track"/>
 		
-		<s:HSlider id="trackslide" left="300" right="225" change="trackslide_changeHandler(event)"
-				   maximum="1" minimum="0" skinClass="graphite.skins.HSliderSkin" stepSize="0.001"
+		<s:HSlider id="trackslide" left="300" right="275" change="trackslide_changeHandler(event)"
+				   maximum="1" minimum="0" stepSize="0.001"
 				   verticalCenter="16"/>
 		
 		<s:HSlider id="volumeslide" right="10" width="113" change="volumeslide_changeHandler(event)"
-				   maximum="100" minimum="0" value="100" verticalCenter="-10"/>
+				   maximum="100" minimum="0" value="100" verticalCenter="-10"
+				   toolTip="Volume" dataTipFormatFunction="volumeFormat"/>
 		<s:Image id="volumeicon" right="131" source="@Embed('assets/icons/player_sound_1.png')"
 				 verticalCenter="-13"/>
 		<s:Label id="time" left="205" top="39" width="87" height="15" fontFamily="Verdana"

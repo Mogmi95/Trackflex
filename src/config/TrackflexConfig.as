@@ -1,6 +1,7 @@
 package config
 {
 	import controller.LibraryController;
+	import controller.PlayerController;
 	
 	import flash.events.Event;
 	import flash.filesystem.File;
@@ -66,11 +67,13 @@ package config
 			
 			sendXML += "<root>" +
 							"<librarydir value=\"" + _libraryDir + "\" />" +
+							"<loop value=\"" + _loop + "\" />" +
+							"<random value=\"" + _random + "\" />" +
+							"<volume value=\"" + PlayerController.volume + "\" />" +
 						"</root>";
 			
 			fileStream.open(file, FileMode.WRITE);
 			fileStream.writeMultiByte(String(sendXML), "UTF-8");
-			trace("done");
 		}
 		
 		private static function onCompleteHandler(event : Event) : void
@@ -78,10 +81,18 @@ package config
 			var xml		 	: XML 		= new XML(event.target.data);
 			var elements	: XMLList 	= xml.elements();
 			
-			_libraryDir = xml..librarydir[0].@value;
+			if (xml..librarydir[0] != null)
+				_libraryDir = xml..librarydir[0].@value;
+			if (xml..loop[0] != null)
+				_loop = xml..loop[0].@value;
+			if (xml..random[0] != null)
+				_random = xml..random[0].@value;
+			if (xml..volume[0] != null)
+				PlayerController.volume = xml..volume[0].@value;
 			
-			LibraryController.loadFromDir(new File(_libraryDir));
+			LibraryController.setLibraryDir(new File(_libraryDir));
 			LibraryController.populateView();
+			PlayerController.updateIcons();
 		}
 	}
 }

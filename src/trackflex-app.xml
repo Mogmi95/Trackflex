@@ -125,7 +125,7 @@
 	<!-- The icon the system uses for the application. For at least one resolution,
 	specify the path to a PNG file included in the AIR package. Optional. -->
 	<icon>
-		<image128x128>assets/logo.png</image128x128>
+		<image64x64>assets/logo.png</image64x64>
 	</icon>
 
 	<!-- Whether the application handles the update when a user double-clicks an update version

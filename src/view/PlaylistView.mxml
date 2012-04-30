@@ -5,20 +5,36 @@
 		 xmlns:itemrenderer="view.itemrenderer.*">
 	<fx:Script>
 		<![CDATA[
+			import controller.PlaylistController;
+			
 			import mx.collections.ArrayList;
+			import mx.collections.IList;
+			
+			protected function clickHandler(event : MouseEvent) : void
+			{
+				PlaylistController.clearAll();
+			}
+			
 		]]>
 	</fx:Script>
 
 	<fx:Declarations>
 		<!-- Placer ici les éléments non visuels (services et objets de valeur, par exemple). -->
 	</fx:Declarations>
-		<mx:DataGrid id="grid" width="100%" height="100%" dataProvider="{new ArrayList()}">
-			<mx:columns>
-				<mx:DataGridColumn itemRenderer="view.itemrenderer.TrackButtonRenderer" width="82" dataField="buttons"
-								   headerText="" rendererIsEditor="true" sortable="false"/>
-				<mx:DataGridColumn headerText="Title" dataField="title" sortable="false"/>
-				<mx:DataGridColumn headerText="Album" dataField="album" sortable="false"/>
-				<mx:DataGridColumn headerText="Artist" dataField="artist" sortable="false"/>
-			</mx:columns>
-		</mx:DataGrid>
+	<mx:DataGrid id="grid" width="100%" height="100%" dataProvider="{new ArrayList()}">
+		<mx:columns>
+			<mx:DataGridColumn itemRenderer="view.itemrenderer.TrackButtonRenderer" width="82" dataField="buttons"
+							   headerText="" rendererIsEditor="true" sortable="false"/>
+			<mx:DataGridColumn headerText="Title" dataField="title" sortable="false"/>
+			<mx:DataGridColumn headerText="Album" dataField="album" sortable="false"/>
+			<mx:DataGridColumn headerText="Artist" dataField="artist" sortable="false"/>
+		</mx:columns>
+	</mx:DataGrid>
+	<s:Group buttonMode="true" click="clickHandler(event)">
+		
+		<s:Label x="0" y="0" width="83" height="25" text="   Clear all" textAlign="center"
+				 verticalAlign="middle"/>
+		<s:Image x="5" y="5" source="assets/icons/remove.gif"/>
+	</s:Group>
+
 </s:Group>

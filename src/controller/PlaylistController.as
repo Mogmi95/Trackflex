@@ -21,12 +21,15 @@ package controller
 		private static var _playlist	: Vector.<Sound>	= new Vector.<Sound>();
 		private static var _currentPos	: int				= 0;
 		
-		public static function addTrack(path : String) : void
+		public static function addTrack(sound : Sound) : void
 		{
-			var sound 	: Sound	= new Sound();
+			var track	: Object = { button : new TrackButtonRenderer(),
+									 title : sound.id3.songName == null ? "undefined" : sound.id3.songName,
+									 artist : sound.id3.artist == null ? "undefined" : sound.id3.artist,
+									 album : sound.id3.album == null ? "undefined" : sound.id3.album};
 			
-			sound.addEventListener(Event.COMPLETE, onCompleteHandler);
-			sound.load(new URLRequest(path));
+			IList(_view.grid.dataProvider).addItem(track);
+			_playlist.push(sound);
 		}
 		
 		public static function play(pos : int) : void
@@ -45,6 +48,13 @@ package controller
 			}
 			--_playlist.length;
 			
+		}
+		
+		public static function clearAll() : void
+		{
+			while (_playlist.length != 0)
+				removeTrack(0);
+			IList(_view.grid.dataProvider).removeAll();
 		}
 		
 		public static function swapTrack(index1 : int, index2 : int) : void
@@ -100,20 +110,7 @@ package controller
 				PlayerController.currentTrack = _playlist[_currentPos];
 			_view.grid.selectedIndex = _currentPos;
 		}
-		
-		private static function onCompleteHandler(event : Event) : void
-		{
-			var sound 	: Sound = Sound(event.currentTarget);
-			var track	: Object = { button : new TrackButtonRenderer(),
-								  	 title : sound.id3.songName == null ? "undefined" : sound.id3.songName,
-									 artist : sound.id3.artist == null ? "undefined" : sound.id3.artist,
-									 album : sound.id3.album == null ? "undefined" : sound.id3.album};
 			
-			IList(_view.grid.dataProvider).addItem(track);
-			_playlist.push(sound);
-			sound.removeEventListener(Event.COMPLETE, onCompleteHandler);
-		}
-		
 		private static function randomize() : int
 		{
 			var newpos	: int	= Math.floor(Math.random() * _playlist.length);

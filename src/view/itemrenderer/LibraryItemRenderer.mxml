@@ -2,47 +2,84 @@
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
 		 xmlns:s="library://ns.adobe.com/flex/spark"
 		 xmlns:mx="library://ns.adobe.com/flex/mx"
-		 height="20" >
+		 height="20"
+		 creationComplete="creationCompleteHandler(event)">
 
+	<s:states>
+		<s:State name="dir" />
+		<s:State name="track" />
+	</s:states>
+	
+	<fx:Declarations>
+		<fx:String id="name" />
+	</fx:Declarations>
+	
 	<fx:Script>
 		<![CDATA[
 			import controller.LibraryController;
 			import controller.PlayerController;
 			import controller.PlaylistController;
 			
-			protected function label_rollOverHandler(event:MouseEvent):void
+			import mx.core.UIComponent;
+			import mx.events.FlexEvent;
+			
+			public static function label_rollOverHandler(event : MouseEvent) : void
 			{
-				label.setStyle("textDecoration", "underline");
+				Label(event.target).setStyle("color", 0x00cc00);
 			}
 			
-			protected function label_rollOutHandler(event:MouseEvent):void
+			public static function label_rollOutHandler(event : MouseEvent) : void
 			{
-				label.setStyle("textDecoration", "none");
+				Label(event.target).setStyle("color", 0xcccccc);
 			}
 			
-			protected function label_clickHandler(event : MouseEvent) : void
+			protected function dir_clickHandler(event : MouseEvent) : void
+			{		
+				LibraryController.loadFromDir(Label(event.currentTarget).text);
+				LibraryController.populateView();
+			}
+			
+			protected function track_clickHandler(event : MouseEvent) : void
 			{
-				var arr : Array		= Label(event.currentTarget).text.split(".");
-				var ext	: String	= arr[arr.length - 1];
-				
-				if (ext == "mp3")
-				{
-					PlaylistController.addTrack(LibraryController.libPath + "/" + Label(event.currentTarget).text);
-				}
+				PlaylistController.addTrack(LibraryController.trackList[Label(event.target).text]);
+			}
+			
+			protected function creationCompleteHandler(event : FlexEvent) : void
+			{
+				if (currentState == "dir")
+					dir.text = name;
 				else
-				{
-					LibraryController.loadFromDir(new File(LibraryController.libPath + "/" + Label(event.currentTarget).text));
-					LibraryController.populateView();
-				}
+					track.text = name;
+				
+			}
+			
+			protected function play_clickHandler(event : MouseEvent) : void
+			{
+				PlaylistController.clearAll();
+				PlaylistController.addTrack(LibraryController.trackList[LibraryItemRenderer(UIComponent(event.target).parent.parent).track.text]);
+				PlaylistController.play(0);
+			}
+			
+			protected function add_clickHandler(event : MouseEvent) : void
+			{
+				PlaylistController.addTrack(LibraryController.trackList[LibraryItemRenderer(UIComponent(event.target).parent.parent).track.text]);
 			}
 			
 		]]>
 	</fx:Script>
 	
-	<fx:Declarations>
-	</fx:Declarations>
-	
-	<s:Label id="label" left="20" width="100%" height="100%" rollOut="label_rollOutHandler(event)"
-			 rollOver="label_rollOverHandler(event)" text="Toto" buttonMode="true"
-			 click="label_clickHandler(event)"/>
+	<s:Label includeIn="dir" id="dir" left="20" width="100%" height="100%" rollOut="label_rollOutHandler(event)"
+			 rollOver="label_rollOverHandler(event)" text="Toto" buttonMode="true" 
+			 click="dir_clickHandler(event)"
+			 toolTip="Open directory"/>
+	<s:Label includeIn="track" id="track" left="45" top="2" width="100%" height="100%" rollOut="label_rollOutHandler(event)"
+			 rollOver="label_rollOverHandler(event)" text="Toto" buttonMode="true" 
+			 click="track_clickHandler(event)"
+			 toolTip="Add to playlist"/>
+	<s:Image id="play" includeIn="track" x="5" y="0" source="@Embed('assets/icons/play.gif')"
+			 click="play_clickHandler(event)" buttonMode="true"
+			 toolTip="Play the track"/>
+	<s:Image id="add" includeIn="track" x="25" y="0" source="@Embed('assets/icons/add.gif')"
+			 click="add_clickHandler(event)" buttonMode="true"
+			 toolTip="Add to playlist"/>
 </s:Group>

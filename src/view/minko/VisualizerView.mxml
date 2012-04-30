@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx" width="400" height="300"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
 		 creationComplete="creationCompleteHandler(event)">
 	<fx:Declarations>
 		<!-- Placer ici les éléments non visuels (services et objets de valeur, par exemple). -->
@@ -10,7 +10,6 @@
 	<mx:UIComponent id="viewportContainer" width="100%" height="100%"/>
 	
 	<fx:Script>
-         
 		
 		<![CDATA[
 			import aerys.minko.render.Viewport;
@@ -36,11 +35,19 @@
 			
 			private var _viewport   : Viewport     		= new Viewport(4);
 			private var _camera     : ArcBallCamera		= new ArcBallCamera();
-			private var _light		: DirectionalLight	= new DirectionalLight(0xffffff, 0.6, 0.1, 64, new Vector4(1, -1, 1));
-			private var _ambiant 	: AmbientLight		= new AmbientLight(0x888888);
-			private var _scene 		: StyleGroup		= new StyleGroup(_camera, _light, _ambiant);
+			private var _scene 		: StyleGroup		= new StyleGroup(_camera);
 			private var _point		: Point				= new Point();
 			
+			public function set viewport(value:Viewport):void
+			{
+				_viewport = value;
+			}
+
+			public function get viewport() : Viewport
+			{
+				return _viewport;
+			}
+
 			protected function creationCompleteHandler(event : FlexEvent ) : void
 			{
 				_scene.addChild(new aerys.minko.scene.node.group.Group(
@@ -54,10 +61,6 @@
 				_camera.distance = 2;
 				_camera.rotation.x -= .3;
 				
-				_scene.style.set(LightingStyle.LIGHTS_ENABLED, true)
-					  .set(LightingStyle.CAST_SHADOWS, true)
-					  .set(LightingStyle.RECEIVE_SHADOWS, true);
-				
 				_viewport.alwaysOnTop = true;
 				_viewport.backgroundColor = 0x666666;
 				viewportContainer.addChild(_viewport);
@@ -66,7 +69,7 @@
 				_viewport.addEventListener(MouseEvent.MOUSE_MOVE, mouseMoveHandler);
 			}
 			
-			protected function enterFrameHandler(event : Event) : void
+			public function enterFrameHandler(event : Event) : void
 			{
 				_viewport.render(_scene);
 			}

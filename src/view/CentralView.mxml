@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 xmlns:view="view.*"
+		 xmlns:minko="view.minko.*">
+	<fx:Declarations>
+		<!-- Placer ici les éléments non visuels (services et objets de valeur, par exemple). -->
+	</fx:Declarations>
+	
+	<s:states>
+		<s:State name="Library"/>
+		<s:State name="Visualizer"/>
+	</s:states>
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.IList;
+			protected function onChangeViewToTrack(event : Event):void{
+				viewStack.selectedIndex = 0;
+			}
+			
+			protected function onChangeViewToAlbum(event : Event):void{
+				viewStack.selectedIndex = 1;
+			}
+			
+			protected function onToggleHandler(event : Event) : void
+			{
+				var state	: String	= String(IList(buttonBar.dataProvider).getItemAt(buttonBar.selectedIndex));
+				
+
+				
+				currentState = state;
+					
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<mx:ToggleButtonBar id="buttonBar" right="10" top="10" height="20"
+						itemClick="onToggleHandler(event)">
+		<mx:dataProvider>
+			<fx:Array>
+				<fx:String>Library</fx:String>
+				<fx:String>Visualizer</fx:String>
+			</fx:Array>
+		</mx:dataProvider>
+	</mx:ToggleButtonBar>
+	<mx:ViewStack includeIn="Library" id="viewStack" x="0" y="30" width="100%" height="100%" selectedIndex="1">
+		<s:NavigatorContent id="TracksView" x="0" y="0" width="100%" height="100%">
+			<view:TracksView changeView="onChangeViewToAlbum(event)"/>
+		</s:NavigatorContent>
+		<s:NavigatorContent id="AlbumsView">
+		</s:NavigatorContent>
+	</mx:ViewStack>
+	<view:AlbumsView includeIn="Library" x="0" y="0" width="100%" height="100%"
+					 changeView="onChangeViewToTrack(event)"/>
+	<minko:VisualizerView includeIn="Visualizer" id="visualizer" left="0" right="0" top="30" bottom="0"/>
+</s:Group>

@@ -44,36 +44,20 @@
 			
 			protected function closingHandler(event : Event) : void
 			{
-				trace("closing");
 				TrackflexConfig.save();
 			}
-			
-			protected function onChangeViewToTrack(event : Event):void{
-				viewStack.selectedIndex = 0;
-			}
-			
-			protected function onChangeViewToAlbum(event : Event):void{
-				viewStack.selectedIndex = 1;
-			}
-			
+
 		]]>
 	</fx:Script>
 	
 	<view:PlayerView id="player" y="0" right="0" width="100%" height="70">
 	</view:PlayerView>
-	<mx:TabNavigator left="200" right="0" bottom="0" height="225" borderColor="0x000000">
-		<s:NavigatorContent width="100%" height="100%" label="Playlist">
-			<view:PlaylistView id="playlist" x="0" y="0" width="100%" height="100%">
-			</view:PlaylistView>
-		</s:NavigatorContent>
-		<s:NavigatorContent width="100%" height="100%" label="Equalizer">
-			<view:EqualizerView x="0" y="0" width="100%" height="100%">
-			</view:EqualizerView>
-		</s:NavigatorContent>
-	</mx:TabNavigator>
-	<view:LibraryView id="library" x="0" top="69" bottom="0" width="200">
+	<view:PlaylistView id="playlist" left="250" right="0" bottom="0" height="225">
+	</view:PlaylistView>
+
+	<view:LibraryView id="library" x="0" top="69" bottom="0" width="250">
 	</view:LibraryView>
-	<mx:TabNavigator right="0" top="48" bottom="203" width="200"
+	<mx:TabNavigator right="0" top="48" bottom="225" width="250"
 					 borderColor="0x000000" change="ServiceController.handleChangeTab(event)">
 		<s:NavigatorContent width="100%" height="100%" label="Artist">
 			<view:LastfmInfoView id="infos" x="0" y="0" width="100%" height="100%">
@@ -84,13 +68,5 @@
 			</view:LyricsView>
 		</s:NavigatorContent>
 	</mx:TabNavigator>
-	<mx:ViewStack id="viewStack" x="160" y="80" selectedIndex="1">
-		<s:NavigatorContent id="TracksView">
-			<view:TracksView changeView="onChangeViewToAlbum(event)"/>
-		</s:NavigatorContent>
-		<s:NavigatorContent id="AlbumsView">
-		</s:NavigatorContent>
-	</mx:ViewStack>
-	<view:AlbumsView left="200" right="200" top="70" bottom="225"
-					 changeView="onChangeViewToTrack(event)"/>
+	<minko:VisualizerView left="250" right="250" top="70" bottom="225"/>
 </s:WindowedApplication>

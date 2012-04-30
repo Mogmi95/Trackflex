@@ -32,11 +32,13 @@ package controller
 		private static var _soundChannel	: SoundChannel		= null;
 		private static var _soundTransform	: SoundTransform	= null;
 		
-		public static function get currentTrack()	: Sound	{ return _currentTrack; }
-		public static function get playing()		: Boolean { return _playing; }
+		public static function get currentTrack()	: Sound		{ return _currentTrack; }
+		public static function get playing()		: Boolean 	{ return _playing; }
+		public static function get volume()			: Number	{ return _view.volumeslide.value; }
 
-		public static function set playing(value : Boolean)		: void { _playing = value; }
+		public static function set playing(value : Boolean)		: void 	{ _playing = value; }
 		public static function set pausePoint(value : Number)	: void 	{ _pausePoint = value; }
+		public static function set volume(n : Number)			: void	{ _view.volumeslide.value = n; }
 		public static function set currentTrack(sound : Sound) 	: void
 		{
 			if (_playing)
@@ -155,6 +157,12 @@ package controller
 		public static function previous() : void
 		{
 			PlaylistController.prevTrack();
+		}
+		
+		public static function updateIcons() : void
+		{
+			_view.updateLoopIcon();
+			_view.updateRandomIcon();
 		}
 		
 		private static function soundCompleteHandler(event : Event) : void
